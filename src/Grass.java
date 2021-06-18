@@ -5,6 +5,7 @@ public class Grass {
     int col;
     static boolean buyGrass=false;
     public boolean eatenGrass=false;
+    public int  counterForDisAppear=0;
 
     private static ArrayList<Grass>grasses;
     static

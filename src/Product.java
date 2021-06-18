@@ -1,18 +1,20 @@
 import java.util.ArrayList;
 
-public class Product {
+public class Product extends Warehouse {
     String name;
     int  amount;
     int priceOfSell;
     int row;
     int col;
-     public   int amountOfEgg = 0;
-    public int amountOfFeather = 0;
-     public  int amountOfMilk = 0;
+
       public  char EGG='e';
    public char MILK='m';
      public   char FEATHER='f';
 
+     public boolean showProduct=false;
+     public  int counterForDestroy=0;
+
+       public final int Capacity_product=1;
     private static ArrayList<Product>products;
     static
     {
@@ -21,6 +23,7 @@ public class Product {
     static String[] typesOfProduct = {"egg", "feather", "milk"};
     public Product(String name, int priceOfSell, int row , int col)
     {
+
         this.name=name;
         this.row=row;
         this.col=col;
@@ -41,7 +44,7 @@ public class Product {
         return row;
     }
 
-    public String getName() {
+    public  String getName() {
         return name;
     }
 
@@ -51,5 +54,16 @@ public class Product {
 
     public int getPriceOfSell() {
         return priceOfSell;
+    }
+    public static Product getProduct(String name)
+    {
+        for(Product product : products)
+        {
+            if(product.getName().equalsIgnoreCase(name))
+            {
+                return product;
+            }
+        }
+        return null;
     }
 }

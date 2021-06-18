@@ -4,9 +4,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DomesticAnimal extends Animal {
     int price;
     String product;
+    public static int amountOfHens=0;
+    public static int amountOFTurkey=0;
+    public static int amountOfBuffalo=0;
     private int health=100;
+    public int getCounterOfTurnForGenerateProduct=1;
+    public  int counterForIncreaseHealth=0;
+    public  int counterForDistanceOfWalk=0;
    public boolean generateProduct=false;
     static boolean Sell = false;
+  public   boolean increaseHealthOfDomesticAnimals = false;
+  public  boolean eatGrass=false;
     static String[] names = {"Hen", "Turkey", "Buffalo"};
 
     private static ArrayList<DomesticAnimal> domesticAnimals;
@@ -77,7 +85,6 @@ public class DomesticAnimal extends Animal {
     public String getProduct() {
         return product;
     }
-
 
 
 }

@@ -4,6 +4,7 @@ public class Dog extends Animal {
      int price;
     boolean ded;
     public char DOG='d';
+    public  int counterForDistanceOfWalk=0;
      private  static  ArrayList<Dog>dogs;
      static
      {

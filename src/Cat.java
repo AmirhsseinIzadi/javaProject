@@ -6,6 +6,7 @@ public class Cat {
     int row;
     int col;
     char CAT='c';
+    public int counterForDistanceOfWalk=0;
     private static ArrayList<Cat>cats;
     static
     {
@@ -50,5 +51,9 @@ public class Cat {
 
     public int getCol() {
         return col;
+    }
+
+    public String getName() {
+        return name;
     }
 }

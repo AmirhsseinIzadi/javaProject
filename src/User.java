@@ -4,7 +4,7 @@ public class User {
     private static ArrayList<User> users;
     private String Username;
     private String PassWord;
-
+    public static int amountOfCoin=500;
     static {
         users = new ArrayList<>();
     }
@@ -33,6 +33,10 @@ public class User {
 
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public int getAmountOfCoin() {
+        return amountOfCoin;
     }
 
     public static User getUserByUsername(String username) {

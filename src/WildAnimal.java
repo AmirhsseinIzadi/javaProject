@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WildAnimal extends Animal {
+public class WildAnimal extends Animal{
     String [] names={"Lion","Bear","Tiger"};
     int damage=0;
-    boolean inCage=false;
+     public boolean inCage=false;
+     public int countForDie=0;
+     public int distanceOfWalk=0;
+    private static ArrayList<WildAnimal> wildAnimalsInCage;
     private static ArrayList<WildAnimal>wildAnimals;
     static
     {
         wildAnimals=new ArrayList<>();
+    }
+    static {
+        wildAnimalsInCage = new ArrayList<>();
     }
 
     public WildAnimal(String name,int health, int row , int col )
@@ -36,6 +42,23 @@ public class WildAnimal extends Animal {
 {
     return wildAnimals;
 }
+    public static ArrayList<WildAnimal> getWildAnimalInCage() {
+        return wildAnimalsInCage;
+    }
+    public static WildAnimal getWildAnimalsInCageObject(ArrayList<String> bars)
+    {
+        for (WildAnimal wildAnimal : wildAnimalsInCage)
+        {
+            for (int i=0 ; i<bars.size();i++)
+            {
+                if(wildAnimal.getName().equalsIgnoreCase(bars.get(i)))
+                {
+                    return  wildAnimal;
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public void setRow(int row) {
