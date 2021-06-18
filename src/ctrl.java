@@ -22,10 +22,10 @@ public class ctrl {
     boolean BakeryWasMade = false;
     boolean iceCreamFactoryWasMade = false;
     boolean tailoringWasMade = false;
-    boolean startLevel1=false;
-    boolean startLevel2=false;
+    boolean startLevel1 = false;
+    boolean startLevel2 = false;
     int Profit = 0;
-    boolean quite=false;
+    boolean quite = false;
     boolean mojavez;
 
     ctrl() {
@@ -58,10 +58,8 @@ public class ctrl {
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("exit")) {
                 return;
-            }
-
-            else {
-                if(mojavez) {
+            } else {
+                if (mojavez) {
                     checkWaterWellDry(getCommandMatcher(input, "check WaterWell"));
                     BuyGrass(getCommandMatcher(input, "plant"));
                     BuyDomesticAnimal(getCommandMatcher(input, "buy ([A-Za-z ]+)$"));
@@ -97,7 +95,7 @@ public class ctrl {
 
         walkDomesticAnimals();
         generateWildAnimals();
-         walkWildAnimals();
+        walkWildAnimals();
         generateProduct();
         walkDog();
         walkCat();
@@ -558,126 +556,78 @@ public class ctrl {
             for (int i = 0; i < domesticAnimal.counterForDistanceOfWalk; i++) {
                 Random random = new Random();
                 int rand = random.nextInt(7) + 1;
-               if(rand%2==0) {
-                   col++;
-                   if(col<=0)
-                   {
-                       col=1;
-                   }
-                   else if(col>=29)
-                   {
-                       col=28;
-                   }
-               }
-               else if(rand%3==0)
-               {
-                   col+=2;
-                   row++;
-                   if(col<=0)
-                   {
-                       col=1;
-                   }
-                   else if(col>=29)
-                   {
-                       col=28;
-                   }
-                   else if(row>=5)
-                   {
-                       row=4;
-                   }
-                   else if(row<=0)
-                   {
-                       row=1;
+                if (rand % 2 == 0) {
+                    col++;
+                    if (col <= 0) {
+                        col = 1;
+                    } else if (col >= 29) {
+                        col = 28;
+                    }
+                } else if (rand % 3 == 0) {
+                    col += 2;
+                    row++;
+                    if (col <= 0) {
+                        col = 1;
+                    } else if (col >= 29) {
+                        col = 28;
+                    } else if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
 
-                   }
-               }
-               else if(rand%5==0)
-               {
-                   col+=2;
-                   row--;
-                   if(col<=0)
-                   {
-                       col=1;
-                   }
-                   else if(col>=29)
-                   {
-                       col=28;
-                   }
-                   else if(row>=5)
-                   {
-                       row=4;
-                   }
-                   else if(row<=0)
-                   {
-                       row=1;
+                    }
+                } else if (rand % 5 == 0) {
+                    col += 2;
+                    row--;
+                    if (col <= 0) {
+                        col = 1;
+                    } else if (col >= 29) {
+                        col = 28;
+                    } else if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
 
-                   }
-               }
-               else if(rand%7==0)
-                {
+                    }
+                } else if (rand % 7 == 0) {
                     col--;
-                    if(col<=0)
-                    {
-                        col=1;
-                    }
-                    else if(col>=29)
-                    {
-                        col=28;
-                    }
-                    else if(row>=5)
-                    {
-                        row=4;
-                    }
-                    else if(row<=0)
-                    {
-                        row=1;
+                    if (col <= 0) {
+                        col = 1;
+                    } else if (col >= 29) {
+                        col = 28;
+                    } else if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
 
                     }
 
-                }
-               else if(rand%3==1)
-               {
-                   col -=2;
-                   row++;
-                   if(col<=0)
-                   {
-                       col=1;
-                   }
-                   else if(col>=29)
-                   {
-                       col=28;
-                   }
-                   else if(row>=5)
-                   {
-                       row=4;
-                   }
-                   else if(row<=0)
-                   {
-                       row=1;
+                } else if (rand % 3 == 1) {
+                    col -= 2;
+                    row++;
+                    if (col <= 0) {
+                        col = 1;
+                    } else if (col >= 29) {
+                        col = 28;
+                    } else if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
 
-                   }
-               }
-               else if(rand>7)
-               {
-                   col -=2;
-                   row-=2;
-                   if(col<=0)
-                   {
-                       col=1;
-                   }
-                   else if(col>=29)
-                   {
-                       col=28;
-                   }
-                   else if(row>=5)
-                   {
-                       row=4;
-                   }
-                   else if(row<=0)
-                   {
-                       row=1;
+                    }
+                } else if (rand > 7) {
+                    col -= 2;
+                    row -= 2;
+                    if (col <= 0) {
+                        col = 1;
+                    } else if (col >= 29) {
+                        col = 28;
+                    } else if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
 
-                   }
+                    }
 
 
                 }
@@ -1065,7 +1015,7 @@ public class ctrl {
                 row = domesticAnimal.getRow();
                 col = domesticAnimal.getCol();
                 if (domesticAnimal.getName().equalsIgnoreCase("hen")) {
-                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 2 && domesticAnimal.getCounterOfTurnForGenerateProduct%2==0) {
+                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 2 && domesticAnimal.getCounterOfTurnForGenerateProduct % 2 == 0) {
                         Random random = new Random();
                         int x = random.nextInt(row + 2) + 1;
                         int y = random.nextInt(col + 2);
@@ -1077,7 +1027,7 @@ public class ctrl {
 
                 } else if (domesticAnimal.getName().equalsIgnoreCase("turkey")) {
                     System.out.println(domesticAnimal.getCounterOfTurnForGenerateProduct);
-                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 3 && domesticAnimal.getCounterOfTurnForGenerateProduct%3==0) {
+                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 3 && domesticAnimal.getCounterOfTurnForGenerateProduct % 3 == 0) {
                         Random random = new Random();
                         int x1 = random.nextInt(row + 2) + 2;
                         int y = random.nextInt(col + 1);
@@ -1086,7 +1036,7 @@ public class ctrl {
                         domesticAnimal.getCounterOfTurnForGenerateProduct = 0;
                     }
                 } else if (domesticAnimal.getName().equalsIgnoreCase("buffalo")) {
-                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 5 && domesticAnimal.getCounterOfTurnForGenerateProduct%5==0) {
+                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 5 && domesticAnimal.getCounterOfTurnForGenerateProduct % 5 == 0) {
                         Random random = new Random();
                         int x2 = random.nextInt(row + 1) + 1;
                         int y = random.nextInt(col) + 1;
@@ -1139,10 +1089,10 @@ public class ctrl {
                     if (row == productOfFactory.getRow() && col == productOfFactory.getCol()) {
                         if (productOfFactory.getName().equalsIgnoreCase("flour") || productOfFactory.getName().equalsIgnoreCase("cloth") || productOfFactory.getName().equalsIgnoreCase("milkPackage")) {
                             Warehouse.counter_Capacity += 2;
-                            System.out.println(productOfFactory.getName()+" "+"added in WareHouse");
+                            System.out.println(productOfFactory.getName() + " " + "added in WareHouse");
                         } else if (productOfFactory.getName().equalsIgnoreCase("bread") || productOfFactory.getName().equalsIgnoreCase("dress") || productOfFactory.getName().equalsIgnoreCase("iceCream")) {
                             Warehouse.counter_Capacity += 4;
-                            System.out.println(productOfFactory.getName()+" "+"added in WareHouse");
+                            System.out.println(productOfFactory.getName() + " " + "added in WareHouse");
                         }
                         warehouses.add(productOfFactory);
                         productOfFactories.remove(productOfFactory);
@@ -1162,20 +1112,20 @@ public class ctrl {
     public void generateWildAnimals() {
         System.out.println(counterOfTurn);
         if (turn) {
-            if (counterOfTurn ==2) {
+            if (counterOfTurn == 2) {
 
                 Random random = new Random();
                 int row = random.nextInt(1) + 1;
                 int col = random.nextInt(4) + 1;
                 WildAnimal wildAnimal = new WildAnimal("lion", 100, row, col);
-                WildAnimal wildAnimal1 = new WildAnimal("lion", 100, row + 1, col+2);
+                WildAnimal wildAnimal1 = new WildAnimal("lion", 100, row + 1, col + 2);
                 if (DomesticAnimal.Sell) {
                     checkDeadDomesticAnimals();
                 } else {
                     map[wildAnimal.getRow()][wildAnimal.getCol()] = LION;
                     map[wildAnimal.getRow()][wildAnimal.getCol() + 1] = LION;
                 }
-            } else if (counterOfTurn ==4) {
+            } else if (counterOfTurn == 4) {
                 Random random = new Random();
                 int row = random.nextInt(2) + 1;
                 int col = random.nextInt(3) + 1;
@@ -1326,8 +1276,8 @@ public class ctrl {
                     map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
                     for (int i = 0; i < wildAnimal.distanceOfWalk; i++) {
                         col++;
-                        if (col>= 29) {
-                            col=29;
+                        if (col >= 29) {
+                            col = 29;
                             wildAnimals.remove(wildAnimal);
                             System.out.println("kk");
                             return;
@@ -1336,9 +1286,8 @@ public class ctrl {
                     }
                     wildAnimal.setRow(row);
                     wildAnimal.setCol(col);
-                    wildAnimal.distanceOfWalk=0;
+                    wildAnimal.distanceOfWalk = 0;
                     map[row][col] = LION;
-
 
 
                 } else if (wildAnimal.getName().equalsIgnoreCase("bear")) {
@@ -1346,14 +1295,14 @@ public class ctrl {
                     for (int i = 0; i < wildAnimal.distanceOfWalk; i++) {
                         col++;
                         if (col >= 29) {
-                            col=29;
+                            col = 29;
                             wildAnimals.remove(wildAnimal);
                             return;
                         }
                     }
                     wildAnimal.setRow(row);
                     wildAnimal.setCol(col);
-                    wildAnimal.distanceOfWalk=0;
+                    wildAnimal.distanceOfWalk = 0;
                     map[row][col] = BEAR;
 
 
@@ -1362,15 +1311,15 @@ public class ctrl {
                         map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
                         for (int i = 0; i < wildAnimal.distanceOfWalk; i++) {
                             col += 2;
-                            if (col>= 29) {
-                                col=29;
+                            if (col >= 29) {
+                                col = 29;
                                 wildAnimals.remove(wildAnimal);
                                 return;
                             }
                         }
                         wildAnimal.setRow(row);
                         wildAnimal.setCol(col);
-                        wildAnimal.distanceOfWalk=0;
+                        wildAnimal.distanceOfWalk = 0;
                         map[row][col] = TIGER;
                     }
                 }
@@ -1410,12 +1359,12 @@ public class ctrl {
 
                 }
 
-        } else {
-            System.out.println(" WaterWell is dried");
+            } else {
+                System.out.println(" WaterWell is dried");
+            }
         }
-    }
 
-}
+    }
 
     public void eatingGrass() {
         ArrayList<Grass> grasses = Grass.getGrasses();
@@ -1423,8 +1372,8 @@ public class ctrl {
             if (grass.eatenGrass) {
 
                 grass.counterForDisAppear++;
-               if (grass.counterForDisAppear >= 2) {
-                   System.out.println("iiiii");
+                if (grass.counterForDisAppear >= 2) {
+                    System.out.println("iiiii");
                     grasses.remove(grass);
                     map[grass.getRow()][grass.getCol()] = ' ';
                 }
@@ -1453,25 +1402,18 @@ public class ctrl {
                 if (matcher1.find()) {
                     User user = new User(username, password);
                     System.out.println("please enter ths option you want  1-start 1   2-logout   3-setting");
-                    String str=scanner.nextLine();
-                    if(str.equalsIgnoreCase("start 1"))
-                    {
+                    String str = scanner.nextLine();
+                    if (str.equalsIgnoreCase("start 1")) {
                         System.out.println("your welcome ");
-                        startLevel1=true;
-                        quite=true;
-                        mojavez=true;
-                    }
-                    else if(str.equalsIgnoreCase("logout"))
-                    {
+                        startLevel1 = true;
+                        quite = true;
+                        mojavez = true;
+                    } else if (str.equalsIgnoreCase("logout")) {
                         System.out.println("Please Enter The Option You Want: 1-select 2-signup ");
                         return;
-                    }
-                    else if(str.equalsIgnoreCase("setting"))
-                    {
+                    } else if (str.equalsIgnoreCase("setting")) {
 
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("please enter invalid command");
                     }
                 }
@@ -1493,53 +1435,42 @@ public class ctrl {
                 System.out.println("this username and password  not match");
             } else {
                 System.out.println("please enter ths option you want  1-start 1  2-start 2 3- start 3 4-logout   5-setting");
-                  String str=scanner.nextLine();
-                if(str.equalsIgnoreCase("start 1"))
-
-                {
-                      startLevel1=true;
-                }
-                else if(str.equalsIgnoreCase("start 2"))
-                {
-                    startLevel2=true;
+                String str = scanner.nextLine();
+                if (str.equalsIgnoreCase("start 1")) {
+                    startLevel1 = true;
+                } else if (str.equalsIgnoreCase("start 2")) {
+                    startLevel2 = true;
                 }
 
             }
         }
     }
-    public void CatchWildAnimal(Matcher matcher)
-    {
-        if(matcher.find()) {
-            int row =Integer.parseInt(matcher.group(1));
+
+    public void CatchWildAnimal(Matcher matcher) {
+        if (matcher.find()) {
+            int row = Integer.parseInt(matcher.group(1));
             int col = Integer.parseInt(matcher.group(2));
-            ArrayList<Warehouse>warehouses=Warehouse.getWarehouses();
-            ArrayList<WildAnimal> wildAnimals=WildAnimal.getWildAnimals();
-            ArrayList<WildAnimal>wildAnimalsInCage=WildAnimal.getWildAnimalInCage();
+            ArrayList<Warehouse> warehouses = Warehouse.getWarehouses();
+            ArrayList<WildAnimal> wildAnimals = WildAnimal.getWildAnimals();
+            ArrayList<WildAnimal> wildAnimalsInCage = WildAnimal.getWildAnimalInCage();
 
-            for(WildAnimal wildAnimal : new ArrayList<>(wildAnimals))
-            {
-                if(wildAnimal.getRow()==row && wildAnimal.getCol()==col)
-                {
-                    wildAnimal.inCage=true;
+            for (WildAnimal wildAnimal : new ArrayList<>(wildAnimals)) {
+                if (wildAnimal.getRow() == row && wildAnimal.getCol() == col) {
+                    wildAnimal.inCage = true;
                     wildAnimal.countForDie++;
-                    if(wildAnimal.getName().equalsIgnoreCase("lion") && wildAnimal.countForDie==3)
-                    {
+                    if (wildAnimal.getName().equalsIgnoreCase("lion") && wildAnimal.countForDie == 3) {
                         wildAnimalsInCage.add(wildAnimal);
                         wildAnimals.remove(wildAnimal);
-                        map[wildAnimal.getRow()][wildAnimal.getCol()]= ' ';
-                    }
-                    else if(wildAnimal.getName().equalsIgnoreCase("bear") && wildAnimal.countForDie==4)
-                    {
+                        map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
+                    } else if (wildAnimal.getName().equalsIgnoreCase("bear") && wildAnimal.countForDie == 4) {
                         wildAnimalsInCage.add(wildAnimal);
                         wildAnimals.remove(wildAnimal);
-                        map[wildAnimal.getRow()][wildAnimal.getCol()]= ' ';
+                        map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
 
-                    }
-                    else if(wildAnimal.getName().equalsIgnoreCase("tiger") && wildAnimal.countForDie==5)
-                    {
+                    } else if (wildAnimal.getName().equalsIgnoreCase("tiger") && wildAnimal.countForDie == 5) {
                         wildAnimalsInCage.add(wildAnimal);
                         wildAnimals.remove(wildAnimal);
-                        map[wildAnimal.getRow()][wildAnimal.getCol()]= ' ';
+                        map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
                     }
                 }
 
@@ -1571,24 +1502,21 @@ public class ctrl {
                 }
 
 
-                ArrayList<Dog>dogs=Dog.getDogs();
-                for(Dog dog : dogs)
-                {
+                ArrayList<Dog> dogs = Dog.getDogs();
+                for (Dog dog : dogs) {
                     dog.counterForDistanceOfWalk++;
                 }
-                ArrayList<Cat>cats=Cat.getCats();
-                for(Cat cat : cats)
-                {
+                ArrayList<Cat> cats = Cat.getCats();
+                for (Cat cat : cats) {
                     cat.counterForDistanceOfWalk++;
                 }
                 if (WaterWell.requestForFilling) {
                     WaterWell.countTurnForFilling++;
                 }
-                if(WaterWell.requestForFilling) {
+                if (WaterWell.requestForFilling) {
                     WaterWell.countTurnForFilling++;
-                    if(WaterWell.countTurnForFilling>=3 && WaterWell.countTurnForFilling%3==0)
-                    {
-                        WaterWell.full=true;
+                    if (WaterWell.countTurnForFilling >= 3 && WaterWell.countTurnForFilling % 3 == 0) {
+                        WaterWell.full = true;
                     }
                 }
                 countTimeForProductFlour();
@@ -1614,65 +1542,54 @@ public class ctrl {
             ShowDress();
             ShowProduct();
             showMap();
-            turn=true;
-        }
-        else if (!matcher.find()) {
+            turn = true;
+        } else if (!matcher.find()) {
             turn = false;
         }
     }
- public void ShowInformation()
- {
 
-         ArrayList<DomesticAnimal>domesticAnimals=DomesticAnimal.getDomesticAnimals();
-         for(DomesticAnimal domesticAnimal : domesticAnimals)
-         {
-             System.out.println("name:"+domesticAnimal.getName()+" "+"row:"+domesticAnimal.getRow()+" "+"col:"+domesticAnimal.getCol()+" "+"health:"+domesticAnimal.getHealth());
-         }
-         ArrayList<WildAnimal>wildAnimals=WildAnimal.getWildAnimals();
-         for(WildAnimal wildAnimal : wildAnimals)
-         {
-             System.out.println("name:"+wildAnimal.getName()+" "+"row:"+wildAnimal.getRow()+" "+"col:"+wildAnimal.getCol()+" "+"number of cage for stop:"+wildAnimal.countForDie);
-         }
-         ArrayList<Product>products=Product.getProducts();
-         for(Product product : products)
-         {
-             System.out.println("name:"+product.getName()+" "+"row:"+product.getRow()+" "+"col:"+product.getCol());
+    public void ShowInformation() {
 
-         }
-         ArrayList<ProductOfFactory>productOfFactories=ProductOfFactory.getProductOfFactories();
-         for(ProductOfFactory productOfFactory : productOfFactories)
-         {
-             System.out.println("name:"+productOfFactory.getName()+" "+"row:"+productOfFactory.getRow()+""+"col:"+productOfFactory.getCol());
-         }
-         ArrayList<Cat>cats= Cat.getCats();
-         for(Cat cat : cats)
-         {
-             System.out.println("name:"+cat.getName()+" "+"row:"+cat.getRow()+" "+" col:"+cat.getCol());
-         }
-         ArrayList<Dog>dogs=Dog.getDogs();
+        ArrayList<DomesticAnimal> domesticAnimals = DomesticAnimal.getDomesticAnimals();
+        for (DomesticAnimal domesticAnimal : domesticAnimals) {
+            System.out.println("name:" + domesticAnimal.getName() + " " + "row:" + domesticAnimal.getRow() + " " + "col:" + domesticAnimal.getCol() + " " + "health:" + domesticAnimal.getHealth());
+        }
+        ArrayList<WildAnimal> wildAnimals = WildAnimal.getWildAnimals();
+        for (WildAnimal wildAnimal : wildAnimals) {
+            System.out.println("name:" + wildAnimal.getName() + " " + "row:" + wildAnimal.getRow() + " " + "col:" + wildAnimal.getCol() + " " + "number of cage for stop:" + wildAnimal.countForDie);
+        }
+        ArrayList<Product> products = Product.getProducts();
+        for (Product product : products) {
+            System.out.println("name:" + product.getName() + " " + "row:" + product.getRow() + " " + "col:" + product.getCol());
 
-             for (Dog dog : dogs)
-             {
-                 System.out.println("name:"+dog.getName()+" "+"row:"+dog.getRow()+" "+" col:"+dog.getCol());
-             }
-             ArrayList<Grass>grasses=Grass.getGrasses();
-             for(Grass grass : grasses)
-             {
-                 System.out.println("row:"+grass.getRow()+" "+"col:"+grass.getCol());
-             }
+        }
+        ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
+        for (ProductOfFactory productOfFactory : productOfFactories) {
+            System.out.println("name:" + productOfFactory.getName() + " " + "row:" + productOfFactory.getRow() + "" + "col:" + productOfFactory.getCol());
+        }
+        ArrayList<Cat> cats = Cat.getCats();
+        for (Cat cat : cats) {
+            System.out.println("name:" + cat.getName() + " " + "row:" + cat.getRow() + " " + " col:" + cat.getCol());
+        }
+        ArrayList<Dog> dogs = Dog.getDogs();
 
-           System.out.println("time elapsed of game :"+counterOfTurn);
-             if(startLevel1)
-             {
-                 TaskOfLevel1();
-             }
-            else if(startLevel2)
-             {
-                 TaskOfLevel2();
-             }
+        for (Dog dog : dogs) {
+            System.out.println("name:" + dog.getName() + " " + "row:" + dog.getRow() + " " + " col:" + dog.getCol());
+        }
+        ArrayList<Grass> grasses = Grass.getGrasses();
+        for (Grass grass : grasses) {
+            System.out.println("row:" + grass.getRow() + " " + "col:" + grass.getCol());
+        }
+
+        System.out.println("time elapsed of game :" + counterOfTurn);
+        if (startLevel1) {
+            TaskOfLevel1();
+        } else if (startLevel2) {
+            TaskOfLevel2();
+        }
 
 
- }
+    }
 
     public void reduceCoin(int price) {
         User.amountOfCoin -= price;
@@ -1685,56 +1602,47 @@ public class ctrl {
 
     }
 
-    public void TaskOfLevel1()
-    {
+    public void TaskOfLevel1() {
         System.out.println("you should perform the following tasks");
-        System.out.println(User.amountOfCoin+"/"+Level.amountOfCoinsForLevel1);
-        System.out.println(Warehouse.amountOfEggInWareHouse()+"/"+Level.amountOfEggsForLevel1);
-        System.out.println(DomesticAnimal.amountOfHens+"/"+Level.amountOfHensForLevel1);
-        if(User.amountOfCoin>=Level.amountOfCoinsForLevel1 && Warehouse.amountOfEggInWareHouse()>=Level.amountOfEggsForLevel1&&DomesticAnimal.amountOfHens>=Level.amountOfHensForLevel1)
-        {
+        System.out.println(User.amountOfCoin + "/" + Level.amountOfCoinsForLevel1);
+        System.out.println(Warehouse.amountOfEggInWareHouse() + "/" + Level.amountOfEggsForLevel1);
+        System.out.println(DomesticAnimal.amountOfHens + "/" + Level.amountOfHensForLevel1);
+        if (User.amountOfCoin >= Level.amountOfCoinsForLevel1 && Warehouse.amountOfEggInWareHouse() >= Level.amountOfEggsForLevel1 && DomesticAnimal.amountOfHens >= Level.amountOfHensForLevel1) {
             System.out.println("You won");
-            Level.TheFirstStageWasCompleted=true;
+            Level.TheFirstStageWasCompleted = true;
             rewardLeve1();
         }
     }
-    public void TaskOfLevel2()
-    {
-        if(Level.TheFirstStageWasCompleted)
-        System.out.println(DomesticAnimal.amountOFTurkey+"/"+Level.amountOfTurkeyForLevel);
-        System.out.println(Warehouse.amountOfFeatherInWreHouse()+"/"+Level.amountOfFeatherForLevel2);
-        System.out.println(Warehouse.amountOfFlourInWarehouse()+"/"+Level.amountOfFlourForLevel2);
-        if(DomesticAnimal.amountOFTurkey>=Level.amountOfTurkeyForLevel&&Warehouse.amountOfFeather>=Level.amountOfFeatherForLevel2&&Warehouse.amountOfFlour>=Level.amountOfFlourForLevel2)
-        {
+
+    public void TaskOfLevel2() {
+        if (Level.TheFirstStageWasCompleted)
+            System.out.println(DomesticAnimal.amountOFTurkey + "/" + Level.amountOfTurkeyForLevel);
+        System.out.println(Warehouse.amountOfFeatherInWreHouse() + "/" + Level.amountOfFeatherForLevel2);
+        System.out.println(Warehouse.amountOfFlourInWarehouse() + "/" + Level.amountOfFlourForLevel2);
+        if (DomesticAnimal.amountOFTurkey >= Level.amountOfTurkeyForLevel && Warehouse.amountOfFeather >= Level.amountOfFeatherForLevel2 && Warehouse.amountOfFlour >= Level.amountOfFlourForLevel2) {
             System.out.println("You wom");
-            Level.TheSecondStageWasCompleted=true;
+            Level.TheSecondStageWasCompleted = true;
             rewardLevel2();
-        }
-        else
-        {
+        } else {
             System.out.println("sorry you have not completed the first step");
 
         }
     }
-public void rewardLeve1()
-{
-    if(Level.TheFirstStageWasCompleted)
-    {
-        if(counterOfTurn<=90)
-        {
-            User.amountOfCoin+=500;
+
+    public void rewardLeve1() {
+        if (Level.TheFirstStageWasCompleted) {
+            if (counterOfTurn <= 90) {
+                User.amountOfCoin += 500;
+            }
         }
     }
-}
-public void rewardLevel2()
-{
-    if(Level.TheSecondStageWasCompleted)
-    {
-        if(counterOfTurn<=120)
-        {
-            User.amountOfCoin+=100;
+
+    public void rewardLevel2() {
+        if (Level.TheSecondStageWasCompleted) {
+            if (counterOfTurn <= 120) {
+                User.amountOfCoin += 100;
+            }
         }
     }
-}
 
 }
