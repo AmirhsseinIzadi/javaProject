@@ -1561,7 +1561,6 @@ public class ctrl {
         ArrayList<Product> products = Product.getProducts();
         for (Product product : products) {
             System.out.println("name:" + product.getName() + " " + "row:" + product.getRow() + " " + "col:" + product.getCol());
-
         }
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
@@ -1599,7 +1598,6 @@ public class ctrl {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         return matcher;
-
     }
 
     public void TaskOfLevel1() {
@@ -1625,7 +1623,6 @@ public class ctrl {
             rewardLevel2();
         } else {
             System.out.println("sorry you have not completed the first step");
-
         }
     }
 
