@@ -6,28 +6,29 @@ import java.util.regex.Pattern;
 
 public class ctrl implements View {
 
-    Scanner scanner = new Scanner(System.in);
+    public static boolean inWareHouse = false;
+    static char[][] map;
     final char HEN = 'h';
     final char TURKEY = 't';
     final char BUFFALO = 'b';
     final char LION = 'l';
     final char TIGER = 't';
     final char BEAR = 'b';
-    static char[][] map;
     public int counterOfTurn = 0;
     public boolean turn = false;
+    Scanner scanner = new Scanner(System.in);
     boolean millWasMade = false;
     boolean texTileWasMade = false;
     boolean milkPackagingWadMade = false;
     boolean BakeryWasMade = false;
     boolean iceCreamFactoryWasMade = false;
     boolean tailoringWasMade = false;
-    boolean startLevel1=false;
-    boolean startLevel2=false;
+    boolean startLevel1 = false;
+    boolean startLevel2 = false;
     int Profit = 0;
-    boolean quite=false;
-    boolean startLevel=false ;
-    public static boolean inWareHouse=false ;
+    boolean quite = false;
+    boolean startLevel = false;
+
 
     ctrl() {
         map = new char[6][30];
@@ -52,7 +53,8 @@ public class ctrl implements View {
             } else if (input1.equalsIgnoreCase("exit")) {
                 return;
             } else {
-                System.out.println("please enter valid command");
+                print("Error: please enter valid command");
+
             }
         }
         while (true) {
@@ -86,9 +88,8 @@ public class ctrl implements View {
                     CatchWildAnimal(getCommandMatcher(input, "cage (\\d+) (\\d+)$"));
                     inquiry(getCommandMatcher(input, "inquiry"));
 
-                }
-               else {
-                    System.out.println("The Level is locked !");
+                } else {
+                    System.out.println("Error: The Level is locked !");
 
                 }
             }
@@ -137,12 +138,12 @@ public class ctrl implements View {
 
     public void BuildMill(Matcher matcher) {
         if (matcher.find()) {
-            if (User.amountOfCoin >= 150) {
+            if (User.loggedInUser.amountOfCoin >= 150) {
                 Mill mill = new Mill();
                 millWasMade = true;
                 reduceCoin(mill.priceOfBuild);
             } else {
-                System.out.println("you dont have enough money");
+                print("Error: you dont have enough money");
             }
         }
 
@@ -165,7 +166,7 @@ public class ctrl implements View {
             if (millWasMade) {
                 Mill.MillWork();
             } else {
-                System.out.println("please in the first build factory");
+                print("Error: please in the first build factory");
             }
         }
     }
@@ -195,7 +196,7 @@ public class ctrl implements View {
 
     public void BuildTexTile(Matcher matcher) {
         if (matcher.find()) {
-            if (User.amountOfCoin >= 250) {
+            if (User.loggedInUser.amountOfCoin >= 250) {
                 TexTile texTile = new TexTile();
                 texTileWasMade = true;
                 reduceCoin(texTile.priceOfBuild);
@@ -221,7 +222,7 @@ public class ctrl implements View {
             if (texTileWasMade) {
                 TexTile.TexTileWork();
             } else {
-                System.out.println("please in the first build factory");
+                print("Error: please in the first build factory");
             }
         }
     }
@@ -252,7 +253,7 @@ public class ctrl implements View {
 
     public void BuildMilkPackaging(Matcher matcher) {
         if (matcher.find()) {
-            if (User.amountOfCoin >= 400) {
+            if (User.loggedInUser.amountOfCoin >= 400) {
                 MilkPackaging milkPackaging = new MilkPackaging();
                 milkPackagingWadMade = true;
                 reduceCoin(milkPackaging.priceOfBuild);
@@ -277,7 +278,7 @@ public class ctrl implements View {
             if (milkPackagingWadMade) {
                 MilkPackaging.MilkPackagingWork();
             } else {
-                System.out.println("please in the first build factory");
+                print("Error: please in the first build factory");
             }
         }
     }
@@ -307,12 +308,12 @@ public class ctrl implements View {
 
     public void BuildBakery(Matcher matcher) {
         if (matcher.find()) {
-            if (User.amountOfCoin >= 250) {
+            if (User.loggedInUser.amountOfCoin >= 250) {
                 Bakery bakery = new Bakery();
                 BakeryWasMade = true;
                 reduceCoin(bakery.priceOfBuild);
             } else {
-                System.out.println("you dont have enough money");
+                print("Error: you dont have enough money");
             }
 
         }
@@ -335,7 +336,7 @@ public class ctrl implements View {
             if (BakeryWasMade) {
                 Bakery.BakeryWork();
             } else {
-                System.out.println("please in the first build factory");
+                print("Error: please in the first build factory");
             }
         }
     }
@@ -365,12 +366,12 @@ public class ctrl implements View {
 
     public void BuildIceCreamFactory(Matcher matcher) {
         if (matcher.find()) {
-            if (User.amountOfCoin >= 550) {
+            if (User.loggedInUser.amountOfCoin >= 550) {
                 IceCreamFactory iceCreamFactory = new IceCreamFactory();
                 iceCreamFactoryWasMade = true;
                 reduceCoin(iceCreamFactory.priceOfBuild);
             } else {
-                System.out.println("you dont have enough money");
+                print("Error: you dont have enough money");
             }
 
         }
@@ -393,7 +394,7 @@ public class ctrl implements View {
             if (iceCreamFactoryWasMade) {
                 IceCreamFactory.iceCreamWork();
             } else {
-                System.out.println("please in the first build factory");
+                print("Error: please in the first build factory");
             }
         }
     }
@@ -423,12 +424,12 @@ public class ctrl implements View {
 
     public void BuildTailoring(Matcher matcher) {
         if (matcher.find()) {
-            if (User.amountOfCoin >= 400) {
+            if (User.loggedInUser.amountOfCoin >= 400) {
                 Tailoring tailoring = new Tailoring();
                 tailoringWasMade = true;
                 reduceCoin(tailoring.priceOfBuild);
             } else {
-                System.out.println("you dont have enough money");
+                print("Error: you dont have enough money");
             }
         }
     }
@@ -450,7 +451,7 @@ public class ctrl implements View {
             if (tailoringWasMade) {
                 Tailoring.TailoringWork();
             } else {
-                System.out.println("please in the first build factory");
+                print("Error: please in the first build factory");
             }
         }
     }
@@ -503,7 +504,7 @@ public class ctrl implements View {
             int price = 0;
             if (str.equalsIgnoreCase("hen")) {
                 price = 100;
-                if (User.amountOfCoin >= 100) {
+                if (User.loggedInUser.amountOfCoin >= 100) {
                     reduceCoin(price);
 
                     DomesticAnimal domesticAnimal = new DomesticAnimal(str, row, col, price);
@@ -513,11 +514,11 @@ public class ctrl implements View {
 
                     DomesticAnimal.Sell = true;
                 } else {
-                    System.out.println("you dont have enough money");
+                    print("Error: you dont have enough money");
                 }
             } else if (str.equalsIgnoreCase("turkey")) {
                 price = 200;
-                if (User.amountOfCoin >= 200) {
+                if (User.loggedInUser.amountOfCoin >= 200) {
                     reduceCoin(price);
                     DomesticAnimal domesticAnimal = new DomesticAnimal(str, row, col, price);
                     DomesticAnimal.amountOFTurkey++;
@@ -525,11 +526,11 @@ public class ctrl implements View {
                     map[domesticAnimal.getRow()][domesticAnimal.getCol()] = TURKEY;
                     DomesticAnimal.Sell = true;
                 } else {
-                    System.out.println("you dont have enough money");
+                    print("Error: you dont have enough money");
                 }
             } else if (str.equalsIgnoreCase("buffalo")) {
                 price = 400;
-                if (User.amountOfCoin >= 400) {
+                if (User.loggedInUser.amountOfCoin >= 400) {
                     reduceCoin(price);
                     DomesticAnimal domesticAnimal = new DomesticAnimal(str, row, col, price);
                     DomesticAnimal.amountOfBuffalo++;
@@ -537,7 +538,7 @@ public class ctrl implements View {
                     map[domesticAnimal.getRow()][domesticAnimal.getCol()] = BUFFALO;
                     DomesticAnimal.Sell = true;
                 } else {
-                    System.out.println("you dont have enough money");
+                    print("Error: you dont have enough money");
                 }
             }
 
@@ -559,91 +560,71 @@ public class ctrl implements View {
             map[row][col] = ' ';
             for (int i = 0; i < domesticAnimal.counterForDistanceOfWalk; i++) {
                 Random random = new Random();
-                int rand = random.nextInt(3) ;
-                if (Grass.getGrasses().size()==0) {
+                int rand = random.nextInt(3);
+                if (Grass.getGrasses().size() == 0) {
                     if (rand == 0) {
                         col++;
                         if (col <= 0) {
-                            col ++;
+                            col++;
                         } else if (col >= 29) {
-                            col --;
+                            col--;
                         }
 
                     } else if (rand == 1) {
                         col--;
                         if (col <= 0) {
-                            col ++;
+                            col++;
                         } else if (col >= 29) {
-                            col --;
+                            col--;
                         }
                     } else if (rand == 2) {
                         row++;
-                        if(row>=6)
-                        {
+                        if (row >= 6) {
                             row--;
-                        }
-                        else if(row<=0)
-                        {
+                        } else if (row <= 0) {
                             row++;
 
                         }
                     } else if (rand == 3) {
                         row--;
-                        if(row>=6)
-                        {
+                        if (row >= 6) {
                             row--;
-                        }
-                        else if(row<=0)
-                        {
+                        } else if (row <= 0) {
                             row++;
 
                         }
                     }
-                }
-                else {
-                    Grass grass=getNearestGrass(domesticAnimal) ;
-                    if (domesticAnimal.row < grass.row){
-                        row++ ;
-                        if(row>=5)
-                        {
+                } else {
+                    Grass grass = getNearestGrass(domesticAnimal);
+                    if (domesticAnimal.row < grass.row) {
+                        row++;
+                        if (row >= 5) {
                             row--;
-                        }
-                        else if(row<=0)
-                        {
+                        } else if (row <= 0) {
                             row++;
 
                         }
-                    }
-                    else if (domesticAnimal.row > grass.row){
-                        row-- ;
-                        if(row>=5)
-                        {
+                    } else if (domesticAnimal.row > grass.row) {
+                        row--;
+                        if (row >= 5) {
                             row--;
-                        }
-                        else if(row<=0)
-                        {
+                        } else if (row <= 0) {
                             row++;
 
                         }
-                    }
-                    else if (domesticAnimal.col < grass.col){
-                        col++ ;
-                        if (col <= 0)
-                        {
-                            col ++;
-                        } else if (col >= 29)
-                        {
-                            col --;
+                    } else if (domesticAnimal.col < grass.col) {
+                        col++;
+                        if (col <= 0) {
+                            col++;
+                        } else if (col >= 29) {
+                            col--;
                         }
-                    }
-                    else if (domesticAnimal.col > grass.col){
-                        col-- ;
-                        if (col <= 0)
-                        {
-                            col ++;
-                        } else if (col >= 29)
-                        {
-                            col --;
+                    } else if (domesticAnimal.col > grass.col) {
+                        col--;
+                        if (col <= 0) {
+                            col++;
+                        } else if (col >= 29) {
+                            col--;
                         }
                     }
 
@@ -651,7 +632,7 @@ public class ctrl implements View {
                 }
 
 
-                }
+            }
 
             domesticAnimal.setCol(col);
             domesticAnimal.setRow(row);
@@ -663,7 +644,7 @@ public class ctrl implements View {
             } else if (domesticAnimal.getName().equalsIgnoreCase("Buffalo")) {
                 map[row][col] = BUFFALO;
             }
-     //       System.out.println("**********************************");
+            //       System.out.println("**********************************");
 
         }
 
@@ -695,12 +676,12 @@ public class ctrl implements View {
         if (matcher.find()) {
             int row = scanner.nextInt();
             int col = scanner.nextInt();
-            if (User.amountOfCoin >= 100) {
+            if (User.loggedInUser.amountOfCoin >= 100) {
                 Dog dog = new Dog("Dog", row, col, 100);
                 reduceCoin(dog.price);
                 map[row][col] = dog.DOG;
             } else {
-                System.out.println("You dont have enough money");
+                print("Error: You dont have enough money");
             }
         }
 
@@ -825,16 +806,16 @@ public class ctrl implements View {
 
     public void BuyCat(Matcher matcher) {
         if (matcher.find()) {
- //           System.out.println("ll");
+            //           System.out.println("ll");
             int row = scanner.nextInt();
             int col = scanner.nextInt();
-            if (User.amountOfCoin >= 150) {
+            if (User.loggedInUser.amountOfCoin >= 150) {
                 Cat cat = new Cat("cat", row, col, 150);
                 reduceCoin(cat.Price);
                 map[cat.getRow()][cat.getCol()] = cat.CAT;
 
             } else {
-                System.out.println("you dont have enough money");
+                print("Error: you dont have enough money");
             }
 
         }
@@ -852,48 +833,35 @@ public class ctrl implements View {
             map[row][col] = ' ';
             for (int i = 0; i < cat.counterForDistanceOfWalk; i++) {
 
-                Product product =getNearestProduct(cat) ;
-                if (cat.row < product.row){
-                    row++ ;
-                    if(row>=5)
-                   {
-                       row=4;
-                   }
-                   else if(row<=0)
-                   {
-                       row=1;
-
-                   }
-                }
-                else if (cat.row > product.row){
-                    row-- ;
-                    if(row>=5)
-                    {
-                        row=4;
-                    }
-                    else if(row<=0)
-                    {
-                        row=1;
+                Product product = getNearestProduct(cat);
+                if (cat.row < product.row) {
+                    row++;
+                    if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
 
                     }
-                }
-                else if (cat.col < product.col){
-                    col++ ;
-                    if (col <= 0)
-                    {
+                } else if (cat.row > product.row) {
+                    row--;
+                    if (row >= 5) {
+                        row = 4;
+                    } else if (row <= 0) {
+                        row = 1;
+
+                    }
+                } else if (cat.col < product.col) {
+                    col++;
+                    if (col <= 0) {
                         col = 1;
-                    } else if (col >= 29)
-                    {
+                    } else if (col >= 29) {
                         col = 28;
                     }
-                }
-                else if (cat.col > product.col){
-                    col-- ;
-                    if (col <= 0)
-                    {
+                } else if (cat.col > product.col) {
+                    col--;
+                    if (col <= 0) {
                         col = 1;
-                    } else if (col >= 29)
-                    {
+                    } else if (col >= 29) {
                         col = 28;
                     }
                 }
@@ -977,7 +945,6 @@ public class ctrl implements View {
                 cat.setCol(col);
                 cat.counterForDistanceOfWalk = 0;
             }
-            ;
             map[row][col] = cat.CAT;
 
             checkDeadCat();
@@ -1075,24 +1042,24 @@ public class ctrl implements View {
                 row = domesticAnimal.getRow();
                 col = domesticAnimal.getCol();
                 if (domesticAnimal.getName().equalsIgnoreCase("hen")) {
-                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 2 && domesticAnimal.getCounterOfTurnForGenerateProduct%2==0) {
+                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 2 && domesticAnimal.getCounterOfTurnForGenerateProduct % 2 == 0) {
                         Random random = new Random();
                         int x = random.nextInt(row + 2) + 1;
-                        int y = random.nextInt(col + 2) +1;
-                        if (row+1>=5){
-                            row=4 ;
+                        int y = random.nextInt(col + 2) + 1;
+                        if (row + 1 >= 5) {
+                            row = 4;
                         }
-                        if (row+1<=0){
-                            row=1 ;
+                        if (row + 1 <= 0) {
+                            row = 1;
                         }
-                        if (col+1>=29){
-                            col=28 ;
+                        if (col + 1 >= 29) {
+                            col = 28;
                         }
-                        if (col+1<=0){
-                            col=1 ;
+                        if (col + 1 <= 0) {
+                            col = 1;
                         }
-                        Product product = new Product("egg", 15, row+1, col+1);
-                 //       System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        Product product = new Product("egg", 15, row + 1, col + 1);
+                        //       System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                         product.showProduct = true;
                         domesticAnimal.getCounterOfTurnForGenerateProduct = 0;
 
@@ -1100,60 +1067,58 @@ public class ctrl implements View {
 
                 } else if (domesticAnimal.getName().equalsIgnoreCase("turkey")) {
                     System.out.println(domesticAnimal.getCounterOfTurnForGenerateProduct);
-                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 3 && domesticAnimal.getCounterOfTurnForGenerateProduct%3==0) {
+                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 3 && domesticAnimal.getCounterOfTurnForGenerateProduct % 3 == 0) {
                         Random random = new Random();
                         int x1 = random.nextInt(row + 2) + 2;
                         int y = random.nextInt(col + 1);
-                        if (row+1>=5){
-                            row=4 ;
+                        if (row + 1 >= 5) {
+                            row = 4;
                         }
-                        if (row+1<=0){
-                            row=1 ;
+                        if (row + 1 <= 0) {
+                            row = 1;
                         }
-                        if (col+1>=29){
-                            col=28 ;
+                        if (col + 1 >= 29) {
+                            col = 28;
                         }
-                        if (col+1<=0){
-                            col=1 ;
+                        if (col + 1 <= 0) {
+                            col = 1;
                         }
-                        Product product = new Product("feather", 20, row+1, col+1);
+                        Product product = new Product("feather", 20, row + 1, col + 1);
                         product.showProduct = true;
                         domesticAnimal.getCounterOfTurnForGenerateProduct = 0;
                     }
                 } else if (domesticAnimal.getName().equalsIgnoreCase("buffalo")) {
-                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 5 && domesticAnimal.getCounterOfTurnForGenerateProduct%5==0) {
+                    if (domesticAnimal.getCounterOfTurnForGenerateProduct >= 5 && domesticAnimal.getCounterOfTurnForGenerateProduct % 5 == 0) {
                         Random random = new Random();
                         int x2 = random.nextInt(row + 1) + 1;
                         int y = random.nextInt(col) + 1;
-                        if (row+1>=5){
-                            row=4 ;
+                        if (row + 1 >= 5) {
+                            row = 4;
                         }
-                        if (row+1<=0){
-                            row=1 ;
+                        if (row + 1 <= 0) {
+                            row = 1;
                         }
-                        if (col+1>=29){
-                            col=28 ;
+                        if (col + 1 >= 29) {
+                            col = 28;
                         }
-                        if (col+1<=0){
-                            col=1 ;
+                        if (col + 1 <= 0) {
+                            col = 1;
                         }
-                        Product product = new Product("milk", 25, row+1, col+1);
+                        Product product = new Product("milk", 25, row + 1, col + 1);
                         product.showProduct = true;
                         domesticAnimal.getCounterOfTurnForGenerateProduct = 0;
                     }
                 }
             }
         }
-        for (DomesticAnimal domesticAnimal : domesticAnimals){
-            if (domesticAnimal.generateProduct){
-                if(domesticAnimal.getName().equalsIgnoreCase("hen")){
-                    map[domesticAnimal.getRow()][domesticAnimal.getCol()]='h' ;
-                }
-                else if (domesticAnimal.getName().equalsIgnoreCase("turkey")){
-                    map[domesticAnimal.getRow()][domesticAnimal.getCol()]='t' ;
-                }
-                else if (domesticAnimal.getName().equalsIgnoreCase("buffalo")){
-                    map[domesticAnimal.getRow()][domesticAnimal.getCol()]='b' ;
+        for (DomesticAnimal domesticAnimal : domesticAnimals) {
+            if (domesticAnimal.generateProduct) {
+                if (domesticAnimal.getName().equalsIgnoreCase("hen")) {
+                    map[domesticAnimal.getRow()][domesticAnimal.getCol()] = 'h';
+                } else if (domesticAnimal.getName().equalsIgnoreCase("turkey")) {
+                    map[domesticAnimal.getRow()][domesticAnimal.getCol()] = 't';
+                } else if (domesticAnimal.getName().equalsIgnoreCase("buffalo")) {
+                    map[domesticAnimal.getRow()][domesticAnimal.getCol()] = 'b';
                 }
             }
         }
@@ -1166,7 +1131,7 @@ public class ctrl implements View {
                 if (product.getName().equalsIgnoreCase("egg")) {
                     map[product.getRow()][product.getCol()] = product.EGG;
 
-               //     System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                    //     System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&");
                 } else if (product.getName().equalsIgnoreCase("feather")) {
                     map[product.getRow()][product.getCol()] = product.FEATHER;
                 } else if (product.getName().equalsIgnoreCase("milk")) {
@@ -1175,17 +1140,15 @@ public class ctrl implements View {
             }
 
         }
-        ArrayList<DomesticAnimal> domesticAnimals=DomesticAnimal.getDomesticAnimals() ;
-        for (DomesticAnimal domesticAnimal : domesticAnimals){
-            if (domesticAnimal.generateProduct){
-                if(domesticAnimal.getName().equalsIgnoreCase("hen")){
-                    map[domesticAnimal.getRow()][domesticAnimal.getCol()]='h' ;
-                }
-                else if (domesticAnimal.getName().equalsIgnoreCase("turkey")){
-                    map[domesticAnimal.getRow()][domesticAnimal.getCol()]='t' ;
-                }
-                else if (domesticAnimal.getName().equalsIgnoreCase("buffalo")){
-                    map[domesticAnimal.getRow()][domesticAnimal.getCol()]='b' ;
+        ArrayList<DomesticAnimal> domesticAnimals = DomesticAnimal.getDomesticAnimals();
+        for (DomesticAnimal domesticAnimal : domesticAnimals) {
+            if (domesticAnimal.generateProduct) {
+                if (domesticAnimal.getName().equalsIgnoreCase("hen")) {
+                    map[domesticAnimal.getRow()][domesticAnimal.getCol()] = 'h';
+                } else if (domesticAnimal.getName().equalsIgnoreCase("turkey")) {
+                    map[domesticAnimal.getRow()][domesticAnimal.getCol()] = 't';
+                } else if (domesticAnimal.getName().equalsIgnoreCase("buffalo")) {
+                    map[domesticAnimal.getRow()][domesticAnimal.getCol()] = 'b';
                 }
             }
         }
@@ -1205,22 +1168,22 @@ public class ctrl implements View {
                     if (row == product.getRow() && product.getCol() == col) {
                         warehouses.add(product);
                         products.remove(product);
-                        inWareHouse=true ;
+                        inWareHouse = true;
                         map[product.getRow()][product.getCol()] = ' ';
                         Warehouse.counter_Capacity++;
-                        System.out.println(product.getName() + " " + "added in WareHouse");
+                        print("Info: " + product.getName() + " " + "added in WareHouse");
                     } else {
-                        System.out.println(" this coordinate is empty of product");
+                        print("Error: this coordinate is empty of product");
                     }
                 }
                 for (ProductOfFactory productOfFactory : new ArrayList<>(productOfFactories)) {
                     if (row == productOfFactory.getRow() && col == productOfFactory.getCol()) {
                         if (productOfFactory.getName().equalsIgnoreCase("flour") || productOfFactory.getName().equalsIgnoreCase("cloth") || productOfFactory.getName().equalsIgnoreCase("milkPackage")) {
                             Warehouse.counter_Capacity += 2;
-                            System.out.println(productOfFactory.getName()+" "+"added in WareHouse");
+                            print("Info: " + productOfFactory.getName() + " " + "added in WareHouse");
                         } else if (productOfFactory.getName().equalsIgnoreCase("bread") || productOfFactory.getName().equalsIgnoreCase("dress") || productOfFactory.getName().equalsIgnoreCase("iceCream")) {
                             Warehouse.counter_Capacity += 4;
-                            System.out.println(productOfFactory.getName()+" "+"added in WareHouse");
+                            print("Info: " + productOfFactory.getName() + " " + "added in WareHouse");
                         }
                         warehouses.add(productOfFactory);
                         productOfFactories.remove(productOfFactory);
@@ -1228,7 +1191,7 @@ public class ctrl implements View {
 
 
                     } else {
-                        System.out.println(" this coordinate is empty of product");
+                        print("Error: this coordinate is empty of product");
                     }
                 }
 
@@ -1240,20 +1203,20 @@ public class ctrl implements View {
     public void generateWildAnimals() {
         System.out.println(counterOfTurn);
         if (turn) {
-            if (counterOfTurn ==2) {
+            if (counterOfTurn == 2) {
 
                 Random random = new Random();
                 int row = random.nextInt(1) + 1;
                 int col = random.nextInt(4) + 1;
                 WildAnimal wildAnimal = new WildAnimal("lion", 100, row, col);
-                WildAnimal wildAnimal1 = new WildAnimal("lion", 100, row + 1, col+2);
+                WildAnimal wildAnimal1 = new WildAnimal("lion", 100, row + 1, col + 2);
                 if (DomesticAnimal.Sell) {
                     checkDeadDomesticAnimals();
                 } else {
                     map[wildAnimal.getRow()][wildAnimal.getCol()] = LION;
                     map[wildAnimal.getRow()][wildAnimal.getCol() + 1] = LION;
                 }
-            } else if (counterOfTurn ==4) {
+            } else if (counterOfTurn == 4) {
                 Random random = new Random();
                 int row = random.nextInt(2) + 1;
                 int col = random.nextInt(3) + 1;
@@ -1303,7 +1266,7 @@ public class ctrl implements View {
 
     public void checkFullCapacityOfWarehouse(int counter) {
         if (counter == Warehouse.Capacity) {
-            System.out.println("Warehouse Capacity is full");
+            print("Info: Warehouse Capacity is full");
             Warehouse.full_Capacity = true;
         }
     }
@@ -1318,7 +1281,9 @@ public class ctrl implements View {
                 if (i >= 9)
                     break;
             }
+            print("Info: truck loaded successfully");
         }
+
     }
 
     public void TruckUnLoad(Matcher matcher) {
@@ -1343,10 +1308,10 @@ public class ctrl implements View {
         if (!(Warehouse.getWarehouseObject(bars) == null)) {
 
             Warehouse warehouse = Warehouse.getWarehouseObject(bars);
-            Warehouse.getWarehouseObject(bars) ;
+            Warehouse.getWarehouseObject(bars);
             Profit += warehouse.getPriceOfSell();
             warehouses.remove(warehouse);
-            System.out.println(Profit);
+            print("Info: your profit is:" + Profit);
         }
 
         if (!(WildAnimal.getWildAnimalsInCageObject(bars) == null)) {
@@ -1367,7 +1332,7 @@ public class ctrl implements View {
     }
 
     public void increaseCoin(int profit) {
-        User.amountOfCoin += profit;
+        User.loggedInUser.amountOfCoin += profit;
         profit = 0;
     }
 
@@ -1380,7 +1345,6 @@ public class ctrl implements View {
             //System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 
         }
-
 
 
     }
@@ -1408,19 +1372,18 @@ public class ctrl implements View {
                     map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
                     for (int i = 0; i < wildAnimal.distanceOfWalk; i++) {
                         col++;
-                        if (col>= 29) {
-                            col=29;
+                        if (col >= 29) {
+                            col = 29;
                             wildAnimals.remove(wildAnimal);
-                            System.out.println("kk");
+                            //  System.out.println("kk");
                             return;
                         }
 
                     }
                     wildAnimal.setRow(row);
                     wildAnimal.setCol(col);
-                    wildAnimal.distanceOfWalk=0;
+                    wildAnimal.distanceOfWalk = 0;
                     map[row][col] = LION;
-
 
 
                 } else if (wildAnimal.getName().equalsIgnoreCase("bear")) {
@@ -1428,14 +1391,14 @@ public class ctrl implements View {
                     for (int i = 0; i < wildAnimal.distanceOfWalk; i++) {
                         col++;
                         if (col >= 29) {
-                            col=29;
+                            col = 29;
                             wildAnimals.remove(wildAnimal);
                             return;
                         }
                     }
                     wildAnimal.setRow(row);
                     wildAnimal.setCol(col);
-                    wildAnimal.distanceOfWalk=0;
+                    wildAnimal.distanceOfWalk = 0;
                     map[row][col] = BEAR;
 
 
@@ -1444,15 +1407,15 @@ public class ctrl implements View {
                         map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
                         for (int i = 0; i < wildAnimal.distanceOfWalk; i++) {
                             col += 2;
-                            if (col>= 29) {
-                                col=29;
+                            if (col >= 29) {
+                                col = 29;
                                 wildAnimals.remove(wildAnimal);
                                 return;
                             }
                         }
                         wildAnimal.setRow(row);
                         wildAnimal.setCol(col);
-                        wildAnimal.distanceOfWalk=0;
+                        wildAnimal.distanceOfWalk = 0;
                         map[row][col] = TIGER;
                     }
                 }
@@ -1464,14 +1427,14 @@ public class ctrl implements View {
         if (matcher.find()) {
 
             if (WaterWell.dry) {
-                System.out.println(" WaterWell is dried");
+                print("Info: WaterWell is dried");
                 String str = scanner.nextLine();
                 if (str.equalsIgnoreCase("well")) {
                     WaterWell.requestForFilling = true;
-                //    System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                    //    System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
                 }
             } else {
-                System.out.println("WaterWELL is full");
+                print("Info: WaterWELL is full");
             }
         }
     }
@@ -1493,12 +1456,12 @@ public class ctrl implements View {
 
                 }
 
-        } else {
-            System.out.println(" WaterWell is dried");
+            } else {
+                print("Info: WaterWell is dried");
+            }
         }
-    }
 
-}
+    }
 
     public void eatingGrass() {
         ArrayList<Grass> grasses = Grass.getGrasses();
@@ -1506,7 +1469,7 @@ public class ctrl implements View {
             if (grass.eatenGrass) {
 
                 grass.counterForDisAppear++;
-               if (grass.counterForDisAppear >= 2) {
+                if (grass.counterForDisAppear >= 2) {
                     grasses.remove(grass);
                     map[grass.getRow()][grass.getCol()] = ' ';
                 }
@@ -1516,15 +1479,15 @@ public class ctrl implements View {
 
     public void signup() {
         boolean isUsernameExists = false;
-       // System.out.println("please enter your username");
-        print("Info: please enter your username");
+        System.out.println("please enter your username");
+
         String username = scanner.nextLine();
         Matcher matcher = getCommandMatcher(username, "[a-zA-Z0-9]+");
         if (matcher.find()) {
             ArrayList<User> users = User.getUsers();
             for (User user : users) {
                 if (user.getUsername().equals(username)) {
-                    System.out.println("this username is exists");
+                    print("Info: this username already exists");
                     isUsernameExists = true;
                     break;
                 }
@@ -1535,27 +1498,22 @@ public class ctrl implements View {
                 Matcher matcher1 = getCommandMatcher(password, "[\\w]+");
                 if (matcher1.find()) {
                     User user = new User(username, password);
+                    User.loggedInUser=user ;
                     System.out.println("please enter ths option you want  1-start 1   2-logout   3-setting");
-                    String str=scanner.nextLine();
-                    if(str.equalsIgnoreCase("start 1"))
-                    {
-                        System.out.println("your welcome ");
-                        startLevel=true ;
-                        startLevel1=true;
-                        quite=true;
-                    }
-                    else if(str.equalsIgnoreCase("logout"))
-                    {
-                        System.out.println("You have logout !");
+                    String str = scanner.nextLine();
+                    if (str.equalsIgnoreCase("start 1")) {
+                        System.out.println(" Welcome !");
+                        print("Info: You entered the game !");
+                        startLevel = true;
+                        startLevel1 = true;
+                        quite = true;
+                    } else if (str.equalsIgnoreCase("logout")) {
+                        print("Info: You have logout !");
                         return;
-                    }
-                    else if(str.equalsIgnoreCase("setting"))
-                    {
+                    } else if (str.equalsIgnoreCase("setting")) {
 
-                    }
-                    else
-                    {
-                        System.out.println("please enter valid command");
+                    } else {
+                        print("Error: please enter valid command");
                     }
                 }
             }
@@ -1566,80 +1524,70 @@ public class ctrl implements View {
         System.out.println("please enter your username");
         String username = scanner.nextLine();
         if (User.getUserByUsername(username) == null) {
-            System.out.println("user with this username not found");
+            print("Error: user with this username not found");
         } else {
             System.out.println("please enter your password");
             String password = scanner.nextLine();
             User user = User.getUserByUsername(username);
             assert user != null;
             if (!user.getPassWord().equals(password)) {
-                System.out.println("this username and password  not match");
+                print("Error: this username and password  not match");
             } else {
-                User.loggedInUser=user ;
+                User.loggedInUser = user;
                 System.out.println("please enter the option you want  1-start 1  2-start 2 3- start 3 4-logout   5-setting");
-                  String str=scanner.nextLine();
-                if(str.equalsIgnoreCase("start 1"))
+                String str = scanner.nextLine();
+                if (str.equalsIgnoreCase("start 1")) {
+                    startLevel1 = true;
+                    startLevel = true;
+                    System.out.println(" Welcome !");
+                    print("Info: You entered the game !");
+                    quite = true;
 
-                {
-                      startLevel1=true;
-                      startLevel=true ;
-                      System.out.println("Welcome !");
-                      quite=true ;
-
-                }
-                else if(str.equalsIgnoreCase("start 2"))
-                {
+                } else if (str.equalsIgnoreCase("start 2")) {
                     System.out.println("*********************************");
-                    if (User.loggedInUser.StageWasCompleted=true) {
+                    if (User.loggedInUser.StageWasCompleted = true) {
                         startLevel2 = true;
                         User.loggedInUser.TheSecondStageWasCompleted = true;
-                        System.out.println("Welcome !");
+                        System.out.println(" Welcome !");
+                        print("Info: You entered the game !");
                         quite = true;
+                    } else {
+                        return;
                     }
-                    else {
-                        return;}
-                }
-                else if (str.equalsIgnoreCase("logout")){
-                    System.out.println("You have logout !");
+                } else if (str.equalsIgnoreCase("logout")) {
+                    print("Info: You have logout !");
                     return;
                 }
 
             }
         }
     }
-    public void CatchWildAnimal(Matcher matcher)
-    {
-        if(matcher.find()) {
-            int row =Integer.parseInt(matcher.group(1));
+
+    public void CatchWildAnimal(Matcher matcher) {
+        if (matcher.find()) {
+            int row = Integer.parseInt(matcher.group(1));
             int col = Integer.parseInt(matcher.group(2));
-            ArrayList<Warehouse>warehouses=Warehouse.getWarehouses();
-            ArrayList<WildAnimal> wildAnimals=WildAnimal.getWildAnimals();
-            ArrayList<WildAnimal>wildAnimalsInCage=WildAnimal.getWildAnimalInCage();
+            ArrayList<Warehouse> warehouses = Warehouse.getWarehouses();
+            ArrayList<WildAnimal> wildAnimals = WildAnimal.getWildAnimals();
+            ArrayList<WildAnimal> wildAnimalsInCage = WildAnimal.getWildAnimalInCage();
 
-            for(WildAnimal wildAnimal : WildAnimal.getWildAnimals())
-            {
-                if(wildAnimal.getRow()==row && wildAnimal.getCol()==col)
-                {
-                    wildAnimal.inCage=true;
+            for (WildAnimal wildAnimal : WildAnimal.getWildAnimals()) {
+                if (wildAnimal.getRow() == row && wildAnimal.getCol() == col) {
+                    wildAnimal.inCage = true;
                     wildAnimal.countForDie++;
-                    if(wildAnimal.getName().equalsIgnoreCase("lion") && wildAnimal.countForDie==3)
-                    {
+                    if (wildAnimal.getName().equalsIgnoreCase("lion") && wildAnimal.countForDie == 3) {
                         wildAnimalsInCage.add(wildAnimal);
                         wildAnimals.remove(wildAnimal);
-                        map[wildAnimal.getRow()][wildAnimal.getCol()]= ' ';
-                    }
-                    else if(wildAnimal.getName().equalsIgnoreCase("bear") && wildAnimal.countForDie==4)
-                    {
+                        map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
+                    } else if (wildAnimal.getName().equalsIgnoreCase("bear") && wildAnimal.countForDie == 4) {
                         wildAnimalsInCage.add(wildAnimal);
                         wildAnimals.remove(wildAnimal);
-                        map[wildAnimal.getRow()][wildAnimal.getCol()]= ' ';
+                        map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
 
-                    }
-                    else if(wildAnimal.getName().equalsIgnoreCase("tiger") && wildAnimal.countForDie==5)
-                    {
+                    } else if (wildAnimal.getName().equalsIgnoreCase("tiger") && wildAnimal.countForDie == 5) {
                         wildAnimalsInCage.add(wildAnimal);
                         wildAnimals.remove(wildAnimal);
-                        map[wildAnimal.getRow()][wildAnimal.getCol()]= ' ';
+                        map[wildAnimal.getRow()][wildAnimal.getCol()] = ' ';
                     }
                 }
 
@@ -1671,24 +1619,21 @@ public class ctrl implements View {
                 }
 
 
-                ArrayList<Dog>dogs=Dog.getDogs();
-                for(Dog dog : dogs)
-                {
+                ArrayList<Dog> dogs = Dog.getDogs();
+                for (Dog dog : dogs) {
                     dog.counterForDistanceOfWalk++;
                 }
-                ArrayList<Cat>cats=Cat.getCats();
-                for(Cat cat : cats)
-                {
+                ArrayList<Cat> cats = Cat.getCats();
+                for (Cat cat : cats) {
                     cat.counterForDistanceOfWalk++;
                 }
                 if (WaterWell.requestForFilling) {
                     WaterWell.countTurnForFilling++;
                 }
-                if(WaterWell.requestForFilling) {
+                if (WaterWell.requestForFilling) {
                     WaterWell.countTurnForFilling++;
-                    if(WaterWell.countTurnForFilling>=3 && WaterWell.countTurnForFilling%3==0)
-                    {
-                        WaterWell.full=true;
+                    if (WaterWell.countTurnForFilling >= 3 && WaterWell.countTurnForFilling % 3 == 0) {
+                        WaterWell.full = true;
                     }
                 }
                 countTimeForProductFlour();
@@ -1714,98 +1659,89 @@ public class ctrl implements View {
             ShowDress();
             ShowProduct();
             showMap();
-            turn=true;
-        }
-        else if (!matcher.find()) {
+            turn = true;
+        } else if (!matcher.find()) {
             turn = false;
         }
     }
- public void ShowInformation()
- {
 
-         ArrayList<DomesticAnimal>domesticAnimals=DomesticAnimal.getDomesticAnimals();
-         for(DomesticAnimal domesticAnimal : domesticAnimals)
-         {
-             System.out.println("name:"+domesticAnimal.getName()+" "+"row:"+domesticAnimal.getRow()+" "+"col:"+domesticAnimal.getCol()+" "+"health:"+domesticAnimal.getHealth());
-         }
-         ArrayList<WildAnimal>wildAnimals=WildAnimal.getWildAnimals();
-         for(WildAnimal wildAnimal : wildAnimals)
-         {
-             System.out.println("name:"+wildAnimal.getName()+" "+"row:"+wildAnimal.getRow()+" "+"col:"+wildAnimal.getCol()+" "+"number of cage for stop:"+wildAnimal.countForDie);
-         }
-         ArrayList<Product>products=Product.getProducts();
-         for(Product product : products)
-         {
-             System.out.println("name:"+product.getName()+" "+"row:"+product.getRow()+" "+"col:"+product.getCol());
+    public void ShowInformation() {
 
-         }
-         ArrayList<ProductOfFactory>productOfFactories=ProductOfFactory.getProductOfFactories();
-         for(ProductOfFactory productOfFactory : productOfFactories)
-         {
-             System.out.println("name:"+productOfFactory.getName()+" "+"row:"+productOfFactory.getRow()+""+"col:"+productOfFactory.getCol());
-         }
-         ArrayList<Cat>cats= Cat.getCats();
-         for(Cat cat : cats)
-         {
-             System.out.println("name:"+cat.getName()+" "+"row:"+cat.getRow()+" "+" col:"+cat.getCol());
-         }
-         ArrayList<Dog>dogs=Dog.getDogs();
+        ArrayList<DomesticAnimal> domesticAnimals = DomesticAnimal.getDomesticAnimals();
+        for (DomesticAnimal domesticAnimal : domesticAnimals) {
+            System.out.println("name:" + domesticAnimal.getName() + " " + "row:" + domesticAnimal.getRow() + " " + "col:" + domesticAnimal.getCol() + " " + "health:" + domesticAnimal.getHealth());
+        }
+        ArrayList<WildAnimal> wildAnimals = WildAnimal.getWildAnimals();
+        for (WildAnimal wildAnimal : wildAnimals) {
+            System.out.println("name:" + wildAnimal.getName() + " " + "row:" + wildAnimal.getRow() + " " + "col:" + wildAnimal.getCol() + " " + "number of cage for stop:" + wildAnimal.countForDie);
+        }
+        ArrayList<Product> products = Product.getProducts();
+        for (Product product : products) {
+            System.out.println("name:" + product.getName() + " " + "row:" + product.getRow() + " " + "col:" + product.getCol());
 
-             for (Dog dog : dogs)
-             {
-                 System.out.println("name:"+dog.getName()+" "+"row:"+dog.getRow()+" "+" col:"+dog.getCol());
-             }
-             ArrayList<Grass>grasses=Grass.getGrasses();
-             for(Grass grass : grasses)
-             {
-                 System.out.println("row:"+grass.getRow()+" "+"col:"+grass.getCol());
-             }
+        }
+        ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
+        for (ProductOfFactory productOfFactory : productOfFactories) {
+            System.out.println("name:" + productOfFactory.getName() + " " + "row:" + productOfFactory.getRow() + "" + "col:" + productOfFactory.getCol());
+        }
+        ArrayList<Cat> cats = Cat.getCats();
+        for (Cat cat : cats) {
+            System.out.println("name:" + cat.getName() + " " + "row:" + cat.getRow() + " " + " col:" + cat.getCol());
+        }
+        ArrayList<Dog> dogs = Dog.getDogs();
 
-           System.out.println("time elapsed of game :"+counterOfTurn);
-             if(startLevel1)
-             {
-                 TaskOfLevel1();
-             }
-            else if(startLevel2)
-             {
-                 TaskOfLevel2();
-             }
+        for (Dog dog : dogs) {
+            System.out.println("name:" + dog.getName() + " " + "row:" + dog.getRow() + " " + " col:" + dog.getCol());
+        }
+        ArrayList<Grass> grasses = Grass.getGrasses();
+        for (Grass grass : grasses) {
+            System.out.println("row:" + grass.getRow() + " " + "col:" + grass.getCol());
+        }
+
+        System.out.println("time elapsed of game :" + counterOfTurn);
+        if (startLevel1) {
+            TaskOfLevel1();
+        } else if (startLevel2) {
+            TaskOfLevel2();
+        }
 
 
- }
+    }
 
     public void reduceCoin(int price) {
-        User.amountOfCoin -= price;
-        try {
-            DataBase.saveData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        User.loggedInUser.amountOfCoin -= price;
+//        try {
+//            DataBase.saveData();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
-    public Product getNearestProduct(Cat cat){
-        double a=100000000 ;
-        int rowOfProduct=1000 ,colOfProduct=1000 ;
-        for (Product product: Product.getProducts()){
-            if (Math.pow((cat.row-product.row),2)+Math.pow((cat.col-product.col),2)<=a){
-                a=Math.pow((cat.row-product.row),2)+Math.pow((cat.col-product.col),2) ;
-                rowOfProduct= product.row;
-                colOfProduct=product.col ;
+
+    public Product getNearestProduct(Cat cat) {
+        double a = 100000000;
+        int rowOfProduct = 1000, colOfProduct = 1000;
+        for (Product product : Product.getProducts()) {
+            if (Math.pow((cat.row - product.row), 2) + Math.pow((cat.col - product.col), 2) <= a) {
+                a = Math.pow((cat.row - product.row), 2) + Math.pow((cat.col - product.col), 2);
+                rowOfProduct = product.row;
+                colOfProduct = product.col;
             }
         }
-        return Product.getProductByRowAndColumn(rowOfProduct,colOfProduct) ;
+        return Product.getProductByRowAndColumn(rowOfProduct, colOfProduct);
 
     }
-    public Grass getNearestGrass(DomesticAnimal domesticAnimal){
-        double a=100000000 ;
-        int rowOfGrass=1000 ,colOfGrass=1000 ;
-        for (Grass grass: Grass.getGrasses()){
-            if (Math.pow((domesticAnimal.row-grass.row),2)+Math.pow((domesticAnimal.col-grass.col),2)<=a){
-                a=Math.pow((domesticAnimal.row-grass.row),2)+Math.pow((domesticAnimal.col-grass.col),2) ;
-                rowOfGrass= grass.row;
-                colOfGrass=grass.col ;
+
+    public Grass getNearestGrass(DomesticAnimal domesticAnimal) {
+        double a = 100000000;
+        int rowOfGrass = 1000, colOfGrass = 1000;
+        for (Grass grass : Grass.getGrasses()) {
+            if (Math.pow((domesticAnimal.row - grass.row), 2) + Math.pow((domesticAnimal.col - grass.col), 2) <= a) {
+                a = Math.pow((domesticAnimal.row - grass.row), 2) + Math.pow((domesticAnimal.col - grass.col), 2);
+                rowOfGrass = grass.row;
+                colOfGrass = grass.col;
             }
         }
-        return Grass.getGrassByRowAndColumn(rowOfGrass,colOfGrass) ;
+        return Grass.getGrassByRowAndColumn(rowOfGrass, colOfGrass);
 
     }
 
@@ -1816,59 +1752,51 @@ public class ctrl implements View {
 
     }
 
-    public void TaskOfLevel1()
-    {
+    public void TaskOfLevel1() {
         System.out.println("you should perform the following tasks");
-        System.out.println("Coins you have to earn : "+User.amountOfCoin+"/"+Level.amountOfCoinsForLevel1);
-        System.out.println("Eggs you have to earn : "+Warehouse.amountOfEggInWareHouse()+"/"+Level.amountOfEggsForLevel1);
-        System.out.println("Number of hens : "+DomesticAnimal.amountOfHens+"/"+Level.amountOfHensForLevel1);
-        if(User.amountOfCoin>=Level.amountOfCoinsForLevel1 && Warehouse.amountOfEggInWareHouse()>=Level.amountOfEggsForLevel1&&DomesticAnimal.amountOfHens>=Level.amountOfHensForLevel1)
-        {
-            System.out.println("You won");
-            Level.TheFirstStageWasCompleted=true;
-            User.loggedInUser.StageWasCompleted=true ;
+        System.out.println("Coins you have to earn : " + User.loggedInUser.amountOfCoin + "/" + Level.amountOfCoinsForLevel1);
+        System.out.println("Eggs you have to earn : " + Warehouse.amountOfEggInWareHouse() + "/" + Level.amountOfEggsForLevel1);
+        System.out.println("Number of hens : " + DomesticAnimal.amountOfHens + "/" + Level.amountOfHensForLevel1);
+        if (User.loggedInUser.amountOfCoin >= Level.amountOfCoinsForLevel1 && Warehouse.amountOfEggInWareHouse() >= Level.amountOfEggsForLevel1 && DomesticAnimal.amountOfHens >= Level.amountOfHensForLevel1) {
+            print("Info: You won !");
+            Level.TheFirstStageWasCompleted = true;
+            User.loggedInUser.StageWasCompleted = true;
             rewardLeve1();
         }
     }
-    public void TaskOfLevel2()
-    {
-        if(Level.TheFirstStageWasCompleted) {
+
+    public void TaskOfLevel2() {
+        if (Level.TheFirstStageWasCompleted) {
             System.out.println("Number of turkeys : " + DomesticAnimal.amountOFTurkey + "/" + Level.amountOfTurkeyForLevel);
             System.out.println("Amount of feather you have to earn : " + Warehouse.amountOfFeatherInWreHouse() + "/" + Level.amountOfFeatherForLevel2);
             System.out.println("Amount of flour you have to earn : " + Warehouse.amountOfFlourInWarehouse() + "/" + Level.amountOfFlourForLevel2);
             if (DomesticAnimal.amountOFTurkey >= Level.amountOfTurkeyForLevel && Warehouse.amountOfFeather >= Level.amountOfFeatherForLevel2 && Warehouse.amountOfFlour >= Level.amountOfFlourForLevel2) {
-                System.out.println("You won");
+                print("Info: You won !");
                 Level.TheSecondStageWasCompleted = true;
-                User.loggedInUser.StageWasCompleted=true ;
+                User.loggedInUser.StageWasCompleted = true;
                 rewardLevel2();
             }
-        }
-        else
-        {
-            System.out.println("sorry you have not completed the first step");
+        } else {
+            print("Error: Sorry you have not completed the first step");
 
         }
 
     }
-public void rewardLeve1()
-{
-    if(Level.TheFirstStageWasCompleted)
-    {
-        if(counterOfTurn<=90)
-        {
-            User.amountOfCoin+=500;
+
+    public void rewardLeve1() {
+        if (Level.TheFirstStageWasCompleted) {
+            if (counterOfTurn <= 90) {
+                User.loggedInUser.amountOfCoin += 500;
+            }
         }
     }
-}
-public void rewardLevel2()
-{
-    if(Level.TheSecondStageWasCompleted)
-    {
-        if(counterOfTurn<=120)
-        {
-            User.amountOfCoin+=100;
+
+    public void rewardLevel2() {
+        if (Level.TheSecondStageWasCompleted) {
+            if (counterOfTurn <= 120) {
+                User.loggedInUser.amountOfCoin += 100;
+            }
         }
     }
-}
 
 }

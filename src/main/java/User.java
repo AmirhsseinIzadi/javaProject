@@ -1,52 +1,36 @@
 import java.util.ArrayList;
 
 public class User {
+    public  int amountOfCoin = 500;
+    public static User loggedInUser;
     private static ArrayList<User> users;
-    private String Username;
-    private String PassWord;
-    public static int amountOfCoin=500;
-    public static User loggedInUser ;
-    public int coin =500 ;
-    boolean StageWasCompleted=false;
-    boolean TheSecondStageWasCompleted=false;
 
     static {
         users = new ArrayList<>();
     }
 
+    boolean StageWasCompleted = false;
+    boolean TheSecondStageWasCompleted = false;
+    private String Username;
+    private String PassWord;
+
     public User(String UserName, String PassWord) {
         this.Username = UserName;
         this.PassWord = PassWord;
         users.add(this);
-        try {
-            DataBase.saveData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public void setPassWord(String passWord) {
-        PassWord = passWord;
-    }
-
-    public String getPassWord() {
-        return PassWord;
-    }
-
-    public String getUsername() {
-        return Username;
+//        try {
+//            DataBase.saveData();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static ArrayList<User> getUsers() {
         return users;
     }
 
-    public int getAmountOfCoin() {
-        return amountOfCoin;
+    public static void setUsers(ArrayList<User> users) {
+        User.users = users;
     }
 
     public static User getUserByUsername(String username) {
@@ -58,7 +42,23 @@ public class User {
         return null;
     }
 
-    public static void setUsers(ArrayList<User> users) {
-        User.users = users;
+    public String getPassWord() {
+        return PassWord;
+    }
+
+    public void setPassWord(String passWord) {
+        PassWord = passWord;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public int getAmountOfCoin() {
+        return amountOfCoin;
     }
 }

@@ -1,28 +1,27 @@
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
 
 public class DomesticAnimal extends Animal {
-    int price;
-    String product;
-    public static int amountOfHens=0;
-    public static int amountOFTurkey=0;
-    public static int amountOfBuffalo=0;
-    private int health=100;
-    public int getCounterOfTurnForGenerateProduct=1;
-    public  int counterForIncreaseHealth=0;
-    public  int counterForDistanceOfWalk=0;
-    public boolean generateProduct=false;
+    public static int amountOfHens = 0;
+    public static int amountOFTurkey = 0;
+    public static int amountOfBuffalo = 0;
     static boolean Sell = false;
-    public   boolean increaseHealthOfDomesticAnimals = false;
-    public  boolean eatGrass=false;
     static String[] names = {"Hen", "Turkey", "Buffalo"};
-
-    private static ArrayList<DomesticAnimal> domesticAnimals;
+    private static final ArrayList<DomesticAnimal> domesticAnimals;
 
     static {
         domesticAnimals = new ArrayList<>();
 
     }
+
+    public int getCounterOfTurnForGenerateProduct = 1;
+    public int counterForIncreaseHealth = 0;
+    public int counterForDistanceOfWalk = 0;
+    public boolean generateProduct = false;
+    public boolean increaseHealthOfDomesticAnimals = false;
+    public boolean eatGrass = false;
+    int price;
+    String product;
+    private final int health = 100;
 
 
     public DomesticAnimal(String name, int row, int col, int price) {
@@ -43,23 +42,16 @@ public class DomesticAnimal extends Animal {
     }
 
 
-
     public static ArrayList<DomesticAnimal> getDomesticAnimals() {
         return domesticAnimals;
     }
 
-
+    public int getPrice() {
+        return price;
+    }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     @Override
@@ -84,6 +76,10 @@ public class DomesticAnimal extends Animal {
 
     public String getProduct() {
         return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
     }
 
 

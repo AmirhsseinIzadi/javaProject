@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class DataBase {
 
+    public static String loggerAddress ;
 
     public static void writeJSON(Object object, String fileAddress) throws IOException {
         GsonBuilder builder = new GsonBuilder();
@@ -25,6 +26,14 @@ public class DataBase {
         Gson gson = builder.create();
         File directoryPath = new File("src\\main\\resources\\DataBase\\users\\");
         File[] filesList = directoryPath.listFiles();
+        File directoryPath1 = new File("src\\main\\resources\\DataBase\\log\\");
+        File[] filesList1 = directoryPath1.listFiles();
+        loggerAddress=directoryPath1.getPath()+"\\"+(filesList1.length+1)+".txt" ;
+        try {
+            writeFile(loggerAddress,"Program Started! ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ArrayList<User> dataBaseUsers = new ArrayList<>();
         for (File file : filesList) {
             BufferedReader bufferedReader = new BufferedReader(
@@ -38,12 +47,13 @@ public class DataBase {
     }
 
 
-    public static void saveData() throws Exception{
-        for(User user:User.getUsers()){
+    public static void saveData() throws Exception {
+        for (User user : User.getUsers()) {
             writeJSON(user, "src\\main\\resources\\DataBase\\users\\" + user.getUsername() + ".json");
         }
 
     }
+
     public static void saveUserInfo(User user) throws IOException {
         writeJSON(user, "src\\main\\resources\\DataBase\\users\\" + user.getUsername() + ".json");
     }
