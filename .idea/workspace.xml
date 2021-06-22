@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="010f8263-090e-4ebe-b608-fac3392cbf99" name="Default Changelist" comment="FinalVersion">
+    <list default="true" id="010f8263-090e-4ebe-b608-fac3392cbf99" name="Default Changelist" comment="OOP_Project_Phase 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ctrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ctrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/DataBase/users/amir.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DataBase/users/amir.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Level.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Warehouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ctrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ctrl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,19 +71,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -118,7 +95,8 @@
       <workItem from="1624127617523" duration="12295000" />
       <workItem from="1624247762251" duration="14713000" />
       <workItem from="1624298327079" duration="2563000" />
-      <workItem from="1624330149532" duration="3878000" />
+      <workItem from="1624330149532" duration="4225000" />
+      <workItem from="1624334988911" duration="389000" />
     </task>
     <task id="LOCAL-00001" summary="Project">
       <created>1624093170377</created>
@@ -134,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624256192899</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="OOP_Project_Phase 1">
+      <created>1624334333550</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1624334333550</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,18 +140,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project" />
     <MESSAGE value="FinalVersion" />
-    <option name="LAST_COMMIT_MESSAGE" value="FinalVersion" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="OOP_Project_Phase 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="OOP_Project_Phase 1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
