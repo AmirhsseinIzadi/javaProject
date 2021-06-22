@@ -25,9 +25,19 @@ public class ctrl implements View {
     boolean tailoringWasMade = false;
     boolean startLevel1 = false;
     boolean startLevel2 = false;
+    boolean startLevel3=false ;
+    boolean startLevel4=false ;
+    boolean startLevel5=false ;
     int Profit = 0;
     boolean quite = false;
     boolean startLevel = false;
+    boolean upgradeMill=false ;
+    boolean upgradeTexTile=false ;
+    boolean upgradeMilkPackaging=false ;
+    boolean upgradeBakery =false ;
+    boolean upgradeIceCreamFactory=false ;
+    boolean upgradeTailoring=false ;
+
 
 
     ctrl() {
@@ -75,11 +85,11 @@ public class ctrl implements View {
                     BuildMilkPackaging(getCommandMatcher(input, "build milkPackaging"));
                     BuildIceCreamFactory(getCommandMatcher(input, "build iceCreamFactory"));
                     BuildTailoring(getCommandMatcher(input, "build tailoring"));
-                    convertEggToFlour(getCommandMatcher(input, "convert egg to flour"));
-                    convertFeatherToCloth(getCommandMatcher(input, "convert feather to cloth"));
-                    convertMilkToMilkPackage(getCommandMatcher(input, "convert milk to milkPackage"));
-                    convertFlourToBread(getCommandMatcher(input, "convert flour to bread "));
-                    convertClothToDress(getCommandMatcher(input, "convert cloth to dress "));
+                    convertEggToFlour(getCommandMatcher(input, "work mill"));
+                    convertFeatherToCloth(getCommandMatcher(input, "work textile"));
+                    convertMilkToMilkPackage(getCommandMatcher(input, "work milkPackaging"));
+                    convertFlourToBread(getCommandMatcher(input, "work bakery"));
+                    convertClothToDress(getCommandMatcher(input, "work tailoring"));
                     TruckLoad(getCommandMatcher(input, "truckload"));
                     TruckGo(getCommandMatcher(input, "truck go"));
                     TruckUnLoad(getCommandMatcher(input, "truck unload"));
@@ -87,9 +97,10 @@ public class ctrl implements View {
                     Turn(getCommandMatcher(input, "turn (\\d+)$"));
                     CatchWildAnimal(getCommandMatcher(input, "cage (\\d+) (\\d+)$"));
                     inquiry(getCommandMatcher(input, "inquiry"));
+                    UpgradeFactory(getCommandMatcher(input,"upgrade (\\w+)$"));
 
                 } else {
-                    System.out.println("Error: The Level is locked !");
+                    print("Error: The Level is locked !");
 
                 }
             }
@@ -130,6 +141,49 @@ public class ctrl implements View {
 
     }
 
+    public void UpgradeFactory(Matcher matcher)
+    {
+        if(matcher.find())
+        {
+            if(User.loggedInUser.amountOfCoin>=100) {
+                if (matcher.group(1).equalsIgnoreCase("mill")) {
+                    if (!upgradeMill) {
+                        upgradeMill = true;
+                        reduceCoin(100);
+                    }
+                } else if (matcher.group(1).equalsIgnoreCase("textile")) {
+                    if (!upgradeTexTile) {
+                        upgradeTexTile = true;
+                        reduceCoin(100);
+                    }
+                } else if (matcher.group(1).equalsIgnoreCase("milkPackaging")) {
+                    if (!upgradeMilkPackaging) {
+                        upgradeMilkPackaging = true;
+                        reduceCoin(100);
+                    }
+                } else if (matcher.group(1).equalsIgnoreCase("bakery")) {
+                    if (!upgradeBakery) {
+                        upgradeBakery = true;
+                        reduceCoin(100);
+                    }
+                } else if (matcher.group(1).equalsIgnoreCase("iceCreamFactory")) {
+                    if (!upgradeIceCreamFactory) {
+                        upgradeIceCreamFactory = true;
+                        reduceCoin(100);
+                    }
+                } else if (matcher.group(1).equalsIgnoreCase("tailoring")) {
+                    if (!upgradeTailoring) {
+                        upgradeTailoring = true;
+                        reduceCoin(100);
+                    }
+                }
+            }
+            else
+            {
+                print("Error: you dont have enough money");
+            }
+        }
+    }
     public void inquiry(Matcher matcher) {
         if (matcher.find()) {
             ShowInformation();
@@ -153,7 +207,12 @@ public class ctrl implements View {
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
             if (productOfFactory.getName().equalsIgnoreCase("flour")) {
-                productOfFactory.counterForConvertEggToFlour++;
+                if (upgradeMill){
+                    productOfFactory.counterForConvertEggToFlour+=2;
+                }
+                else {
+                    productOfFactory.counterForConvertEggToFlour++;
+                }
                 if (productOfFactory.counterForConvertEggToFlour >= 4) {
                     productOfFactory.showFlour = true;
                 }
@@ -208,8 +267,12 @@ public class ctrl implements View {
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
             if (productOfFactory.getName().equalsIgnoreCase("cloth")) {
-                productOfFactory.counterForConvertFeatherToCloth++;
-                System.out.println(productOfFactory.counterForConvertFeatherToCloth);
+                if (upgradeTexTile){
+                    productOfFactory.counterForConvertFeatherToCloth+=2;
+                }
+                else {
+                    productOfFactory.counterForConvertFeatherToCloth++;
+                }
                 if (productOfFactory.counterForConvertFeatherToCloth >= 5) {
                     productOfFactory.showCloth = true;
                 }
@@ -265,7 +328,12 @@ public class ctrl implements View {
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
             if (productOfFactory.getName().equalsIgnoreCase("milkPackage")) {
-                productOfFactory.countForConvertMilkToMilkPackage++;
+                if (upgradeMilkPackaging){
+                    productOfFactory.countForConvertMilkToMilkPackage+=2;
+                }
+                else {
+                    productOfFactory.countForConvertMilkToMilkPackage++;
+                }
                 if (productOfFactory.countForConvertMilkToMilkPackage >= 6) {
                     productOfFactory.showMilkPackage = true;
                 }
@@ -323,7 +391,12 @@ public class ctrl implements View {
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
             if (productOfFactory.getName().equalsIgnoreCase("bread")) {
-                productOfFactory.countForConvertFlourToBread++;
+                if (upgradeBakery){
+                    productOfFactory.countForConvertFlourToBread+=2;
+                }
+                else {
+                    productOfFactory.countForConvertFlourToBread++;
+                }
                 if (productOfFactory.countForConvertFlourToBread >= 5) {
                     productOfFactory.showBread = true;
                 }
@@ -381,7 +454,12 @@ public class ctrl implements View {
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
             if (productOfFactory.getName().equalsIgnoreCase("iceCream")) {
-                productOfFactory.countForConvertMilkPackageToIceCream++;
+                if (upgradeIceCreamFactory){
+                    productOfFactory.countForConvertMilkPackageToIceCream+=2;
+                }
+                else {
+                    productOfFactory.countForConvertMilkPackageToIceCream++;
+                }
                 if (productOfFactory.countForConvertMilkPackageToIceCream >= 7) {
                     productOfFactory.showIceCream = true;
                 }
@@ -438,7 +516,12 @@ public class ctrl implements View {
         ArrayList<ProductOfFactory> productOfFactories = ProductOfFactory.getProductOfFactories();
         for (ProductOfFactory productOfFactory : productOfFactories) {
             if (productOfFactory.getName().equalsIgnoreCase("dress")) {
-                productOfFactory.countForConvertClothToDress++;
+                if (upgradeTailoring){
+                    productOfFactory.countForConvertClothToDress+=2;
+                }
+                else {
+                    productOfFactory.countForConvertClothToDress++;
+                }
                 if (productOfFactory.countForConvertClothToDress >= 6) {
                     productOfFactory.showDress = true;
                 }
@@ -832,121 +915,84 @@ public class ctrl implements View {
 
             map[row][col] = ' ';
             for (int i = 0; i < cat.counterForDistanceOfWalk; i++) {
+                Random random = new Random();
+                int rand = random.nextInt(3);
+                if (Product.getProducts().size() == 0) {
+                    if (rand == 0) {
+                        col++;
+                        if (col <= 0) {
+                            col++;
+                        } else if (col >= 29) {
+                            col--;
+                        }
 
-                Product product = getNearestProduct(cat);
-                if (cat.row < product.row) {
-                    row++;
-                    if (row >= 5) {
-                        row = 4;
-                    } else if (row <= 0) {
-                        row = 1;
+                    } else if (rand == 1) {
+                        col--;
+                        if (col <= 0) {
+                            col++;
+                        } else if (col >= 29) {
+                            col--;
+                        }
+                    } else if (rand == 2) {
+                        row++;
+                        if (row >= 6) {
+                            row--;
+                        } else if (row <= 0) {
+                            row++;
 
-                    }
-                } else if (cat.row > product.row) {
-                    row--;
-                    if (row >= 5) {
-                        row = 4;
-                    } else if (row <= 0) {
-                        row = 1;
+                        }
+                    } else if (rand == 3) {
+                        row--;
+                        if (row >= 6) {
+                            row--;
+                        } else if (row <= 0) {
+                            row++;
 
-                    }
-                } else if (cat.col < product.col) {
-                    col++;
-                    if (col <= 0) {
-                        col = 1;
-                    } else if (col >= 29) {
-                        col = 28;
-                    }
-                } else if (cat.col > product.col) {
-                    col--;
-                    if (col <= 0) {
-                        col = 1;
-                    } else if (col >= 29) {
-                        col = 28;
+                        }
                     }
                 }
-//                if (rand % 3 == 0) {
-//                    col += 2;
-//                    if (col <= 0) {
-//                        col = 1;
-//                    } else if (col >= 29) {
-//                        col = 28;
-//                    }
-//                } else if (rand % 2 == 0) {
-//                    col += 2;
-//                    row++;
-//                    if (col <= 0) {
-//                        col = 1;
-//                    } else if (col >= 29) {
-//                        col = 28;
-//                    } else if (row >= 5) {
-//                        row = 4;
-//                    } else if (row <= 0) {
-//                        row = 1;
-//
-//                    }
-//                } else if (rand % 5 == 1) {
-//                    col += 2;
-//                    row--;
-//                    if (col <= 0) {
-//                        col = 1;
-//                    } else if (col >= 29) {
-//                        col = 28;
-//                    } else if (row >= 5) {
-//                        row = 4;
-//                    } else if (row <= 0) {
-//                        row = 1;
-//
-//                    }
-//                } else if (rand % 7 == 0) {
-//                    col--;
-//                    if (col <= 0) {
-//                        col = 1;
-//                    } else if (col >= 29) {
-//                        col = 28;
-//                    } else if (row >= 5) {
-//                        row = 4;
-//                    } else if (row <= 0) {
-//                        row = 1;
-//
-//                    }
-//
-//                } else if (rand % 3 == 1) {
-//                    col -= 2;
-//                    row++;
-//                    if (col <= 0) {
-//                        col = 1;
-//                    } else if (col >= 29) {
-//                        col = 28;
-//                    } else if (row >= 5) {
-//                        row = 4;
-//                    } else if (row <= 0) {
-//                        row = 1;
-//
-//                    }
-//                } else if (rand % 5 == 0) {
-//                    col -= 2;
-//                    row -= 2;
-//                    if (col <= 0) {
-//                        col = 1;
-//                    } else if (col >= 29) {
-//                        col = 28;
-//                    } else if (row >= 5) {
-//                        row = 4;
-//                    } else if (row <= 0) {
-//                        row = 1;
-//
-//                    }
-//
-//
-//                }
+                    else {
+                        Product product = getNearestProduct(cat);
+                        if (cat.row < product.row) {
+                            row++;
+                            if (row >= 5) {
+                                row = 4;
+                            } else if (row <= 0) {
+                                row = 1;
+
+                            }
+                        } else if (cat.row > product.row) {
+                            row--;
+                            if (row >= 5) {
+                                row = 4;
+                            } else if (row <= 0) {
+                                row = 1;
+
+                            }
+                        } else if (cat.col < product.col) {
+                            col++;
+                            if (col <= 0) {
+                                col = 1;
+                            } else if (col >= 29) {
+                                col = 28;
+                            }
+                        } else if (cat.col > product.col) {
+                            col--;
+                            if (col <= 0) {
+                                col = 1;
+                            } else if (col >= 29) {
+                                col = 28;
+                            }
+                        }
+                    }
+
 
                 cat.setRow(row);
                 cat.setCol(col);
                 cat.counterForDistanceOfWalk = 0;
+
             }
             map[row][col] = cat.CAT;
-
             checkDeadCat();
             taskCat();
         }
@@ -1122,6 +1168,7 @@ public class ctrl implements View {
                 }
             }
         }
+        ShowProduct();
     }
 
     public void ShowProduct() {
@@ -1534,7 +1581,7 @@ public class ctrl implements View {
                 print("Error: this username and password  not match");
             } else {
                 User.loggedInUser = user;
-                System.out.println("please enter the option you want  1-start 1  2-start 2 3- start 3 4-logout   5-setting");
+                System.out.println("please enter the option you want  1-start 1  2-start 2  3-start 3  4-start 4  5-start 5  6-logout   7-setting");
                 String str = scanner.nextLine();
                 if (str.equalsIgnoreCase("start 1")) {
                     startLevel1 = true;
@@ -1544,20 +1591,65 @@ public class ctrl implements View {
                     quite = true;
 
                 } else if (str.equalsIgnoreCase("start 2")) {
-                    System.out.println("*********************************");
-                    if (User.loggedInUser.StageWasCompleted = true) {
+                   // System.out.println("*********************************");
+                    if (User.loggedInUser.StageWasCompleted = false) {
                         startLevel2 = true;
                         User.loggedInUser.TheSecondStageWasCompleted = true;
                         System.out.println(" Welcome !");
                         print("Info: You entered the game !");
                         quite = true;
-                    } else {
-                        return;
                     }
-                } else if (str.equalsIgnoreCase("logout")) {
+                    else {
+                        print("Error: The Level is locked !") ;
+
+                    }
+
+
+                    }
+                    else if (str.equalsIgnoreCase("start 3")){
+                        if (User.loggedInUser.StageWasCompleted = false) {
+                            startLevel3 = true;
+                            User.loggedInUser.TheThirdStageWasCompleted = true;
+                            System.out.println(" Welcome !");
+                            print("Info: You entered the game !");
+                            quite = true;
+                        }
+                        else {
+                            print("Error: The Level is locked !") ;
+
+                        }
+                }
+                else if (str.equalsIgnoreCase("start 4")){
+                    if (User.loggedInUser.StageWasCompleted = false) {
+                        startLevel4 = true;
+                        User.loggedInUser.TheFourthStageWasCompleted = true;
+                        System.out.println(" Welcome !");
+                        print("Info: You entered the game !");
+                        quite = true;
+                    }
+                    else {
+                        print("Error: The Level is locked !") ;
+
+                    }
+                }
+                else if (str.equalsIgnoreCase("start 5")){
+                    if (User.loggedInUser.StageWasCompleted = false) {
+                        startLevel5 = true;
+                        User.loggedInUser.TheFifthStageWasCompleted = true;
+                        System.out.println(" Welcome !");
+                        print("Info: You entered the game !");
+                        quite = true;
+                    }
+                    else {
+                        print("Error: The Level is locked !") ;
+
+                    }
+                }
+                else if (str.equalsIgnoreCase("logout")) {
                     print("Info: You have logout !");
                     return;
                 }
+
 
             }
         }
@@ -1695,7 +1787,7 @@ public class ctrl implements View {
         }
         ArrayList<Grass> grasses = Grass.getGrasses();
         for (Grass grass : grasses) {
-            System.out.println("row:" + grass.getRow() + " " + "col:" + grass.getCol());
+            System.out.println("coordinate of grass "+"row:" + grass.getRow() + " " + "col:" + grass.getCol());
         }
 
         System.out.println("time elapsed of game :" + counterOfTurn);
@@ -1703,6 +1795,15 @@ public class ctrl implements View {
             TaskOfLevel1();
         } else if (startLevel2) {
             TaskOfLevel2();
+        }
+        else if (startLevel3){
+            TaskOfLevel3();
+        }
+        else if (startLevel4){
+            TaskOfLevel4();
+        }
+        else if (startLevel5){
+            TaskOfLevel5();
         }
 
 
@@ -1768,7 +1869,7 @@ public class ctrl implements View {
     public void TaskOfLevel2() {
         if (Level.TheFirstStageWasCompleted) {
             System.out.println("Number of turkeys : " + DomesticAnimal.amountOFTurkey + "/" + Level.amountOfTurkeyForLevel);
-            System.out.println("Amount of feather you have to earn : " + Warehouse.amountOfFeatherInWreHouse() + "/" + Level.amountOfFeatherForLevel2);
+            System.out.println("Amount of feather you have to earn : " + Warehouse.amountOfFeatherInWareHouse() + "/" + Level.amountOfFeatherForLevel2);
             System.out.println("Amount of flour you have to earn : " + Warehouse.amountOfFlourInWarehouse() + "/" + Level.amountOfFlourForLevel2);
             if (DomesticAnimal.amountOFTurkey >= Level.amountOfTurkeyForLevel && Warehouse.amountOfFeather >= Level.amountOfFeatherForLevel2 && Warehouse.amountOfFlour >= Level.amountOfFlourForLevel2) {
                 print("Info: You won !");
@@ -1782,11 +1883,65 @@ public class ctrl implements View {
         }
 
     }
+    public void TaskOfLevel3(){
+        if (Level.TheSecondStageWasCompleted){
+            System.out.println(DomesticAnimal.amountOFTurkey+ "/"+ Level.amountOfTurkeyForLevel3);
+            System.out.println(Warehouse.amountOfEggInWareHouse()+"/"+Level.amountOfEggsForLevel3) ;
+            System.out.println(Warehouse.amountOfMilkINWareHouse()+"/"+Level.amountOfMilkForLevel3);
+            if (DomesticAnimal.amountOFTurkey>=Level.amountOfTurkeyForLevel3 && Warehouse.amountOfMilk>=Level.amountOfMilkForLevel3 && Warehouse.amountOfMilkINWareHouse()>=Level.amountOfEggsForLevel3){
+                print("Info: You won !");
+                Level.TheThirdStageWasCompleted = true;
+                User.loggedInUser.StageWasCompleted = true;
+                rewardLevel3();
+            }
+        } else {
+            print("Error: Sorry you have not completed the second step");
+
+        }
+
+    }
+    public void TaskOfLevel4(){
+        if (Level.TheThirdStageWasCompleted){
+            System.out.println(DomesticAnimal.amountOfBuffalo+ "/" + Level.amountOfBuffaloForLevel4);
+            System.out.println(Warehouse.amountOfClothesINWareHouse() + "/" + Level.amountOfClothsForLevel4);
+            System.out.println(Warehouse.amountOfFeatherInWareHouse()+ "/" + Level.amountOfFeatherForLevel4) ;
+            if (DomesticAnimal.amountOfBuffalo>=Level.amountOfBuffaloForLevel4 && Warehouse.amountOfCloth>=Level.amountOfClothsForLevel4 && Warehouse.amountOfFeatherInWareHouse()>=Level.amountOfFeatherForLevel4){
+                print("Info: You won !");
+                Level.TheFourthStageWasCompleted = true;
+                User.loggedInUser.StageWasCompleted = true;
+                rewardLevel4();
+            }
+        } else {
+            print("Error: Sorry you have not completed the third step");
+
+        }
+
+    }
+    public void TaskOfLevel5(){
+        if (Level.TheFourthStageWasCompleted){
+            System.out.println(DomesticAnimal.amountOfBuffalo+ "/" + Level.amountOfBuffaloForLevel5);
+            System.out.println(User.loggedInUser.amountOfCoin+ "/" + Level.amountOfCoinsForLevel5);
+            System.out.println(DomesticAnimal.amountOfHens+ "/" + Level.amountOfHenForLevel5) ;
+            if (DomesticAnimal.amountOfBuffalo>=Level.amountOfBuffaloForLevel5 && User.loggedInUser.amountOfCoin>=Level.amountOfCoinsForLevel5 && DomesticAnimal.amountOfHens>=Level.amountOfHenForLevel5){
+                print("Info: You won !");
+                Level.TheFifthStageWasCompleted = true;
+                User.loggedInUser.StageWasCompleted = true;
+                rewardLevel5();
+            }
+        } else {
+            print("Error: Sorry you have not completed the third step");
+
+        }
+
+    }
+
+
+
 
     public void rewardLeve1() {
         if (Level.TheFirstStageWasCompleted) {
             if (counterOfTurn <= 90) {
-                User.loggedInUser.amountOfCoin += 500;
+                User.loggedInUser.amountOfCoin += 400;
             }
         }
     }
@@ -1794,7 +1949,28 @@ public class ctrl implements View {
     public void rewardLevel2() {
         if (Level.TheSecondStageWasCompleted) {
             if (counterOfTurn <= 120) {
-                User.loggedInUser.amountOfCoin += 100;
+                User.loggedInUser.amountOfCoin += 500;
+            }
+        }
+    }
+    public void rewardLevel3() {
+        if (Level.TheThirdStageWasCompleted) {
+            if (counterOfTurn <= 150) {
+                User.loggedInUser.amountOfCoin += 600;
+            }
+        }
+    }
+    public void rewardLevel4() {
+        if (Level.TheFourthStageWasCompleted) {
+            if (counterOfTurn <= 180) {
+                User.loggedInUser.amountOfCoin += 700;
+            }
+        }
+    }
+    public void rewardLevel5() {
+        if (Level.TheFifthStageWasCompleted) {
+            if (counterOfTurn <= 210) {
+                User.loggedInUser.amountOfCoin += 800;
             }
         }
     }

@@ -7,6 +7,8 @@ public class Warehouse {
     public static int amountOfEgg = 0;
     public static int amountOfFeather = 0;
     public static int amountOfFlour = 0;
+    public static int amountOfMilk =0 ;
+    public static int amountOfCloth =0 ;
     public static int numberOfEgg = 0;
     public static int counter_Capacity = 0;
     static boolean full_Capacity = false;
@@ -176,24 +178,70 @@ public class Warehouse {
 
     }
 
-    public static int amountOfFeatherInWreHouse() {
+    public static int amountOfFeatherInWareHouse() {
         ArrayList<Warehouse> warehouses = Warehouse.getWarehouses();
-        for (Warehouse warehouse : warehouses) {
-            if (warehouse.getName().equalsIgnoreCase("feather")) {
-                amountOfFeather++;
+        boolean featherInWarehouse=false ;
+        for (Warehouse warehouse1 : warehouses) {
+            if (warehouse1.getName().equalsIgnoreCase("feather")) {
+                if (ctrl.inWareHouse) {
+                    amountOfFeather++;
+                }
             }
         }
+        if (featherInWarehouse){
+            amountOfFeather++ ;
+        }
+        ctrl.inWareHouse=false ;
         return amountOfFeather;
     }
 
     public static int amountOfFlourInWarehouse() {
         ArrayList<Warehouse> warehouses = Warehouse.getWarehouses();
-        for (Warehouse warehouse : warehouses) {
-            if (warehouse.getName().equalsIgnoreCase("flour")) {
-                amountOfFlour++;
+        boolean flourInWareHouse=false ;
+        for (Warehouse warehouse1 : warehouses) {
+            if (warehouse1.getName().equalsIgnoreCase("flour")) {
+                if (ctrl.inWareHouse) {
+                    amountOfFlour++;
+                }
             }
         }
+        if (flourInWareHouse){
+            amountOfFlour++ ;
+        }
+        ctrl.inWareHouse=false;
         return amountOfFlour;
+    }
+    public static int amountOfMilkINWareHouse(){
+        ArrayList<Warehouse> warehouses=Warehouse.getWarehouses();
+        boolean milkInWareHouse=false ;
+        for (Warehouse warehouse1 : warehouses) {
+            if (warehouse1.getName().equalsIgnoreCase("milk")) {
+                if (ctrl.inWareHouse) {
+                    amountOfMilk++;
+                }
+            }
+        }
+        if (milkInWareHouse){
+            amountOfMilk++ ;
+        }
+        ctrl.inWareHouse=false;
+        return amountOfMilk;
+    }
+    public static int amountOfClothesINWareHouse(){
+        ArrayList<Warehouse> warehouses=Warehouse.getWarehouses();
+        boolean clothesInWareHouse=false ;
+        for (Warehouse warehouse1 : warehouses) {
+            if (warehouse1.getName().equalsIgnoreCase("cloth")) {
+                if (ctrl.inWareHouse) {
+                    amountOfCloth++;
+                }
+            }
+        }
+        if (clothesInWareHouse){
+            amountOfCloth++ ;
+        }
+        ctrl.inWareHouse=false;
+        return amountOfCloth;
     }
 
     public static void print(String response) {

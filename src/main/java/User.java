@@ -9,8 +9,12 @@ public class User {
         users = new ArrayList<>();
     }
 
-    boolean StageWasCompleted = false;
-    boolean TheSecondStageWasCompleted = false;
+    boolean StageWasCompleted = true;
+    boolean TheSecondStageWasCompleted = true;
+    boolean TheThirdStageWasCompleted = true;
+    boolean TheFourthStageWasCompleted = true;
+    boolean TheFifthStageWasCompleted = true;
+
     private String Username;
     private String PassWord;
 
